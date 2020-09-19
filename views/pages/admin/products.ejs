@@ -1,0 +1,35 @@
+<%- contentFor('header') %>
+<nav class="navbar navbar-bottom">
+  <div class="container navbar-container">
+    <div>
+      <a href="/admin/products">
+        <h2 class="title" style="margin-bottom: 50px;">Gerenciamento de Produtos</h2>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<%- contentFor('body') %>
+<div class="container">
+  <div class="control">
+    <h4 class="subtitle">Produtos Cadastrados</h4>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Editar</th>
+        <th>Deletar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (product of products){%>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= product.price %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>

@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const expressLayouts = require('express-ejs-layouts');
 const app = express();
-const adminProductsRouter = require('./routes/admin/produtos');
+const adminProductsRouter = require('./routes/admin/products');
 
 app.set('view engine', 'ejs') ;
 app.use(expressLayouts);
