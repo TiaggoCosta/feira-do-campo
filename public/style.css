@@ -1,0 +1,24 @@
+.admin > div.container {
+  margin: 40px 10%;
+}
+
+.admin .control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin table {
+  width: 100%;
+}
+
+.admin table th:first-of-type {
+  width: 50%;
+}
+.admin table td:first-of-type {
+  width: 50%;
+}
+
+.admin table td {
+  vertical-align: middle;
+}
