@@ -4,12 +4,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const expressLayouts = require('express-ejs-layouts');
 const app = express();
-const adminProductsRouter = require('./routes/admin/products');
+const mongoose = require('mongoose');
+const methodOverride = require("method-override");
+
+const adminProductsRoutes = require('./routes/admin/products');
 
 app.set('view engine', 'ejs') ;
 app.use(expressLayouts);
 app.use(bodyParser.urlencoded());
-const mongoose = require('mongoose');
+app.use(methodOverride("_method"));
 
 mongoose.connect(
     process.env.DATABASEURL,
@@ -22,7 +25,7 @@ mongoose.connect(
 );
 
 app.use(express.static(__dirname + '/public'));
-app.use(adminProductsRouter);
+app.use("/admin/products", adminProductsRoutes);
 
 app.get('/', (req, res) => {
     res.render('pages/home');

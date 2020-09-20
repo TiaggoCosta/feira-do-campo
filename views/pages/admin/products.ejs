@@ -10,9 +10,12 @@
 </nav>
 
 <%- contentFor('body') %>
-<div class="container">
-  <div class="control">
-    <h4 class="subtitle">Produtos Cadastrados</h4>
+<div class="container"></div>
+  <div class="d-flex mb-1" >
+    <h4>Produtos Cadastrados</h4>
+    <a href="/admin/products/new" class="ml-auto btn btn-success">
+      <i class="fas fa-plus"></i> Adicionar
+    </a>
   </div>
   <table class="table">
     <thead>
@@ -28,6 +31,20 @@
         <tr>
           <td><%= product.name %></td>
           <td><%= product.price %></td>
+          <td>
+            <a href="/admin/products/<%=product.id%>/edit">
+              <button class="btn btn-primary">
+                <i class="far fa-edit"></i> Editar
+              </button>
+            </a>
+          </td>
+          <td>
+            <form action="/admin/products/<%=product.id%>?_method=DELETE" method="POST">
+              <button class="btn btn-danger">
+                <i class="far fa-trash-alt"></i> Deletar
+              </button>
+            </form>
+          </td>
         </tr>
       <% } %>
     </tbody>
