@@ -4,12 +4,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const expressLayouts = require('express-ejs-layouts');
 const app = express();
-const adminProductsRouter = require('./routes/admin/produtos');
+const mongoose = require('mongoose');
+const methodOverride = require("method-override");
+const adminProductsRoutes = require('./routes/admin/products');
 
 app.set('view engine', 'ejs') ;
 app.use(expressLayouts);
 app.use(bodyParser.urlencoded({ extended: true }));
-const mongoose = require('mongoose');
+app.use(express.static(__dirname + '/public'));
+app.use("/admin/products", adminProductsRoutes);
+app.use(methodOverride("_method"));
 
 mongoose.connect(
     process.env.DATABASEURL,
@@ -20,9 +24,6 @@ mongoose.connect(
         console.log('Aplicação conectada ao banco de dados!');
     }
 );
-
-app.use(express.static(__dirname + '/public'));
-app.use(adminProductsRouter);
 
 app.get('/', (req, res) => {
     res.render('pages/home');

@@ -8,9 +8,28 @@
   <title>Feira do Campo</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand">
+      <img src="/favicon.png" height="28" alt="Feira do Campo">
+    </a>
+    <a class="navbar-brand" href="#">Feira do Campo</a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+        <div class="navbar-nav">
+            <a href="#" class="nav-item nav-link active">Home</a>
+        </div>
+        <div class="navbar-nav">
+            <a href="#" class="nav-item nav-link">Login</a>
+        </div>
+    </div>
+  </nav>
+
    <main>
      <div class="container">
       <%- body %>
