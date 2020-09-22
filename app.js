@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const indexRoutes = require('./routes/index');
 const adminProductsRoutes = require('./routes/admin/products');
+//const seedDB = require("./seeds");
 
 app.set('view engine', 'ejs') ;
 app.use(expressLayouts);
@@ -24,6 +25,7 @@ mongoose.connect(
         console.log('Aplicação conectada ao banco de dados!');
     }
 );
+//seedDB();
 
 app.use('/', indexRoutes);
 app.use('/admin/products', adminProductsRoutes);

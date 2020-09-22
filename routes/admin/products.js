@@ -4,22 +4,12 @@ const Product = require('../../models/product');
 
 //GET all products
 router.get('/', async (req, res) => {
-  var products = [{
-    id: 1234,
-    name: "Tomate",
-    price: 2.90
-  }, {
-    id: 4321,
-    name: "Bergamota",
-    price: 1.99
-  }, {
-    id: 5678,
-    name: "Laranja",
-    price: 3
-  }];
-
-  res.render('pages/admin/products', {
-    products: products
+  Product.find({}, (err, products) => {
+    if(err){
+        console.log(err);
+    } else {
+       res.render('pages/admin/products',{ products });
+    }
   });
 });
 
