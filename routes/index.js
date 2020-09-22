@@ -3,7 +3,13 @@ const router  = express.Router();
 const Product = require('../models/product');
 
 router.get('/', (req, res) => {
-    res.render('pages/home');
+    Product.find({}, (err, products) => {
+        if(err){
+            console.log(err);
+        } else {
+           res.render('pages/home',{ products });
+        }
+    });
 });
 
 module.exports = router;

@@ -12,3 +12,13 @@
         </h1>
     </div>
 </header>
+
+<div class="container">
+
+    <% for (product of products) { %>
+
+        <p><%= product.title %> - <%= product.price %></p>
+
+    <% } %>
+
+</div>
