@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../../models/product');
 
-//GET all products
+// INDEX - GET all products
 router.get('/', async (req, res) => {
   Product.find({}, (err, products) => {
     if(err){
@@ -13,17 +13,30 @@ router.get('/', async (req, res) => {
   });
 });
 
-//GET to show view for adding new product
+// NEW - GET to show view for adding new product
 router.get('/new', async (req, res) => {
   res.send("Implementar tratamento para adicionar novo produto");
 });
 
-//GET to show view for editing a product
+// CREATE - add new product to DB
+
+// SHOW - shows more info about one product
+
+// EDIT - GET to show view for editing a product
 router.get('/:id/edit', async (req, res) => {
-  res.send("Implementar tratamento para editar produto");
+  Product.findById(req.params.id, (err, foundProduct) => {
+      if(err) {
+          console.log(err);
+          res.redirect('/');
+      } else {
+          res.render('pages/admin/edit', { product: foundProduct });
+      }
+  });
 });
 
-//DELETE the product with received id
+// UPDATE - update some product
+
+// DELETE the product with received id
 router.delete('/:id', async (req, res) => {
   res.send("Implementar tratamento para deletar produto");
 });
