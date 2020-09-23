@@ -16,12 +16,21 @@ router.get('/', async (req, res) => {
 
 // NEW - GET to show view for adding new product
 router.get('/new', async (req, res) => {
-  res.send("Implementar tratamento para adicionar novo produto");
+  res.send('pages/admin/products/new');
 });
 
 // CREATE - add new product to DB
-
-// SHOW - shows more info about one product
+router.post('/', (req, res) => {
+  const { title, price, image } = req.body;
+  const newProduct = { title, price, image };
+  Product.create(newProduct, (err, createdProduct) => {
+      if(err) {
+          console.log(err);
+      } else {
+          res.redirect('/admin/products/');
+      }
+  });
+});
 
 // EDIT - GET to show view for editing a product
 router.get('/:id/edit', async (req, res) => {
