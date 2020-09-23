@@ -7,6 +7,7 @@ router.get('/', async (req, res) => {
   Product.find({}, (err, products) => {
     if(err){
         console.log(err);
+        res.redirect('/');
     } else {
        res.render('pages/admin/products',{ products });
     }
@@ -27,7 +28,7 @@ router.get('/:id/edit', async (req, res) => {
   Product.findById(req.params.id, (err, foundProduct) => {
       if(err) {
           console.log(err);
-          res.redirect('/');
+          res.redirect('/admin/products/');
       } else {
           res.render('pages/admin/edit', { product: foundProduct });
       }
@@ -35,6 +36,16 @@ router.get('/:id/edit', async (req, res) => {
 });
 
 // UPDATE - update some product
+router.put('/:id', (req, res) => {
+  Product.findByIdAndUpdate(req.params.id, req.body.product, (err, updatedProduct) => {
+      if(err) {
+          console.log(err);
+          res.redirect('/admin/products/');
+      } else {
+          res.redirect('/admin/products/' + req.params.id);
+      }
+  });
+});
 
 // DELETE the product with received id
 router.delete('/:id', async (req, res) => {
