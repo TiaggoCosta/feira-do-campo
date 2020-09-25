@@ -1,0 +1,21 @@
+<%- contentFor('body') %>
+
+<div class="container-fluid mt-2 show-product">
+  <div class="row justify-content-center">
+    <div class="col-md-9 col-lg-5 d-flex">
+      <div class="card mb-3 mx-auto">
+        <img class="card-img-top img-responsive" src="<%= product.image %>" alt="<%= product.title %>">
+        <div class="card-body">
+          <p class="float-right">
+            $<%= product.price %>
+          </p>
+          <h5 class="card-title"><%= product.title %></h5>
+          <p class="card-text"><%= product.description %></p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  

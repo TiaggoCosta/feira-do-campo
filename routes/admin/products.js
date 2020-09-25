@@ -22,12 +22,13 @@ router.get('/new', (req, res) => {
 // CREATE - add new product to DB
 router.post('/', (req, res) => {
   const { title, price, image, description } = req.body;
-  const newProduct = { title, price, image, description };
+  const newProduct = { title, price, description };
+  if(image.replace(/\s+/g,'') !== '') { newProduct.image = image };
   Product.create(newProduct, (err, createdProduct) => {
     if(err) {
       console.log(err);
     }
-    res.redirect('/admin/products/');
+    res.redirect('/admin/products/' + createdProduct.id);
   });
 });
 
@@ -41,12 +42,13 @@ router.get('/:id/edit', (req, res) => {
 // UPDATE - update some product
 router.put('/:id', (req, res) => {
   const { title, price, image, description } = req.body;
-  const product = { title, price, image, description };
+  const product = { title, price, description };
+  if(image.replace(/\s+/g,'') !== '') { product.image = image };
   Product.findByIdAndUpdate(req.params.id, product, (err, updatedProduct) => {
     if(err) {
       console.log(err);
     } 
-    res.redirect('/admin/products/');
+    res.redirect('/admin/products/' + updatedProduct.id);
   });
 });
 
@@ -57,6 +59,13 @@ router.delete('/:id', (req, res) => {
       console.log(err);
     } 
     res.redirect('/admin/products/');
+  });
+});
+
+// SHOW - shows more info about one product
+router.get("/:id", (req, res) => {
+  Product.findById(req.params.id, (err, foundProduct) => {
+    res.render('pages/products/show', { product: foundProduct });
   });
 });
 

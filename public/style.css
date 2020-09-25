@@ -66,3 +66,7 @@
     font-weight: 700px;
     letter-spacing: 17.4px;
 }
+
+.show-product {
+  max-height: 90vh;
+}
