@@ -21,8 +21,8 @@ router.get('/new', (req, res) => {
 
 // CREATE - add new product to DB
 router.post('/', (req, res) => {
-  const { title, price, image } = req.body;
-  const newProduct = { title, price, image };
+  const { title, price, image, description } = req.body;
+  const newProduct = { title, price, image, description };
   Product.create(newProduct, (err, createdProduct) => {
     if(err) {
       console.log(err);
@@ -40,8 +40,8 @@ router.get('/:id/edit', (req, res) => {
 
 // UPDATE - update some product
 router.put('/:id', (req, res) => {
-  const { title, price, image } = req.body;
-  const product = { title, price, image };
+  const { title, price, image, description } = req.body;
+  const product = { title, price, image, description };
   Product.findByIdAndUpdate(req.params.id, product, (err, updatedProduct) => {
     if(err) {
       console.log(err);
