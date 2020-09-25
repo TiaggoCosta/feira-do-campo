@@ -6,6 +6,8 @@ const expressLayouts = require('express-ejs-layouts');
 const app = express();
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+const multer = require('multer');
+const upload = multer();
 const indexRoutes = require('./routes/index');
 const adminProductsRoutes = require('./routes/admin/products');
 //const seedDB = require("./seeds");
@@ -13,6 +15,7 @@ const adminProductsRoutes = require('./routes/admin/products');
 app.set('view engine', 'ejs') ;
 app.use(expressLayouts);
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(upload.array()); 
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride("_method"));
 
