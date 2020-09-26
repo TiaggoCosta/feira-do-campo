@@ -70,3 +70,32 @@
 .show-product {
   max-height: 90vh;
 }
+
+.img-card-home {
+  width: 100%;
+  max-width: 260px;
+  height: 175px;
+  background-size: contain;
+  background-position: center;
+  object-fit: cover;
+}
+
+.card-home{
+  width: auto;
+  height: 350px;
+  max-height: 350px;
+}
+
+.button-visualizar-home{
+  height: 38px;
+  width: 95%;
+  margin-left: 6px;
+  margin-bottom: 4px;
+}
+
+.product-description-home{
+  max-width: 25ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
