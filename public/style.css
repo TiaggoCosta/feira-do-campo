@@ -71,9 +71,14 @@
   max-height: 90vh;
 }
 
+.img-responsive {
+  background-size: contain;
+  background-position: center;
+  object-fit: cover;
+}
+
 .img-card-home {
   width: 100%;
-  max-width: 260px;
   height: 175px;
   background-size: contain;
   background-position: center;
@@ -98,4 +103,15 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* footer */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+  text-align: center;
 }
