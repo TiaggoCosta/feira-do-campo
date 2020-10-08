@@ -29,9 +29,17 @@
                     <p class="card-text text-right"> R$ <%= product.price%></p>
                 </p>
               </div>
-              <a href="/admin/products/<%=product.id%>">
-              <button type="button" class="btn btn-success button-visualizar-home"data-toggle="tooltip" data-placement="top" title="Clique para mais detalhes">Visualizar</button>
-               </a>
+              <a href="/admin/products/<%= product.id %>">
+                <button type="button" class="btn btn-success button-visualizar-home"data-toggle="tooltip" data-placement="top" title="Clique para mais detalhes">Visualizar</button>
+              </a>
+              <footer class="card-footer">
+                <form action="/cart/products" method="POST">
+                  <input hidden value="<%= product.id %>" name="productId" />
+                  <button class="button has-icon is-inverted">
+                    <i class="fa fa-shopping-cart"></i> Add to cart
+                  </button>
+                </form>
+              </footer>
             </div>
             
         </div>
