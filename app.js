@@ -9,6 +9,7 @@ const methodOverride = require('method-override');
 const indexRoutes = require('./routes/index');
 const adminProductsRoutes = require('./routes/admin/products');
 const cartsRoutes = require('./routes/carts');
+const registerRoutes = require('./routes/register');
 
 const multer = require('multer');
 const upload = multer();
@@ -39,6 +40,7 @@ mongoose.connect(
 //seedDB();
 
 app.use('/', indexRoutes);
+app.use('/register', registerRoutes);
 app.use('/admin/products', adminProductsRoutes);
 app.use('/cart', cartsRoutes);
 
