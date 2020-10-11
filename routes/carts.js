@@ -30,7 +30,7 @@ router.post('/products', async (req, res) => {
   }
   cart.save();
 
-  res.redirect('/cart');
+  res.redirect('/');
 });
 
 // Receive a GET request to show all items in cart
@@ -40,8 +40,18 @@ router.get('/', async (req, res) => {
   }
 
   const cart = await cartsRepo.findById(req.session.cartId);
-
-  res.render('pages/carts/show', { cart });
+  let products = [];
+  
+  for (let item of cart.items) {
+    let foundProduct = await productsRepo.findById(item.productId);
+    let { title, price } = foundProduct;
+    let product = { title, price };
+    product.quantity = item.quantity;
+    products.push(product);
+  }
+  
+  res.render('pages/carts/show', { products, cart });
+  
 });
 
 module.exports = router;
