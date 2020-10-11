@@ -10,6 +10,7 @@ const indexRoutes = require('./routes/index');
 const adminProductsRoutes = require('./routes/admin/products');
 const cartsRoutes = require('./routes/carts');
 const registerRoutes = require('./routes/register');
+const loginRoutes = require('./routes/login');
 
 const multer = require('multer');
 const upload = multer();
@@ -43,6 +44,7 @@ app.use('/', indexRoutes);
 app.use('/register', registerRoutes);
 app.use('/admin/products', adminProductsRoutes);
 app.use('/cart', cartsRoutes);
+app.use('/login', loginRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log('A Feira do Campo está no ar!');
