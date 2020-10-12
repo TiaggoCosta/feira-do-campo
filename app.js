@@ -18,8 +18,12 @@ const upload = multer();
 const cookieSession = require('cookie-session');
 //const seedDB = require("./seeds");
 
+const session = require("express-session");
+const flash = require("connect-flash");
+const passport = require("passport");
+require("./config/auth")(passport);
+
 app.set('view engine', 'ejs') ;
-app.use(expressLayouts);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(upload.array()); 
 app.use(express.static(__dirname + '/public'));
@@ -29,6 +33,24 @@ app.use(
       keys: ['digaamigoeentre']
     })
   );
+
+  app.use(expressLayouts);
+  //sessão
+  app.use(session({
+    secret: "feiralovelace",
+    resave: true,
+    saveUninitialized: true
+  }))
+  app.use(passport.initialize())
+  app.use(passport.session())
+  app.use(flash())
+  //middleware
+  app.use((req, res, next) => {
+    res.locals.suceess_msg = req.flash("success_msg");
+    res.locals.erro_msg = req.flash("erro_msg");
+    res.locals.error = req.flash("error");
+    next()
+  })
 
 mongoose.connect(
     process.env.DATABASEURL,
