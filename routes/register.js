@@ -31,7 +31,8 @@ router.post('/', (req, res) => {
       });
     } else {
       console.log("O e-mail entrado já está cadastrado!\nId:" + foundUser.id);
-      res.redirect("/register");
+      req.flash("error", "Este e-mail já está cadastrado!");
+      res.redirect("back");
     }
   });
 });
