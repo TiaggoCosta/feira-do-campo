@@ -13,4 +13,23 @@ router.get("/", function(req, res){
   });
 });
 
+// UPDATE - update a user
+router.put('/', (req, res) => {
+  const userId = '5f83ab4acdb69d284499bf21';
+
+  const { firstName, lastName, password } = req.body;
+  const user = { firstName, lastName };
+
+  if (password)
+    user.password = password;
+
+  User.findByIdAndUpdate(userId, user, (err, updatedUser) => {
+    if(err) {
+      console.log(err);
+    }
+    console.log('User updated successfully, id: ' + updatedUser.id);
+    res.redirect('/user');
+  });
+});
+
 module.exports = router;
