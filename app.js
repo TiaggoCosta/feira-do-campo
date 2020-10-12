@@ -46,9 +46,11 @@ app.use(passport.session())
 app.use(flash())
 //middleware
 app.use((req, res, next) => {
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
+  res.locals.info = req.flash("info");
   res.locals.suceess_msg = req.flash("success_msg");
   res.locals.erro_msg = req.flash("erro_msg");
-  res.locals.error = req.flash("error");
   res.locals.user_global = req.user || null;
   next()
 })
