@@ -5,8 +5,8 @@ const passport = require('passport');
 
 // INDEX - GET login form
 router.get("/", function(req, res){
-    res.render("pages/login"); 
-  });
+  res.render("pages/login"); 
+});
 
 router.post("/", (req, res, next) => {
   passport.authenticate("local", {
@@ -15,5 +15,5 @@ router.post("/", (req, res, next) => {
     failureFlash: true
   })(req, res, next)
 })
-    
+
 module.exports = router;

@@ -29,28 +29,28 @@ app.use(upload.array());
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride("_method"));
 app.use(
-    cookieSession({
-      keys: ['digaamigoeentre']
-    })
-  );
-
-  app.use(expressLayouts);
-  //sessão
-  app.use(session({
-    secret: "feiralovelace",
-    resave: true,
-    saveUninitialized: true
-  }))
-  app.use(passport.initialize())
-  app.use(passport.session())
-  app.use(flash())
-  //middleware
-  app.use((req, res, next) => {
-    res.locals.suceess_msg = req.flash("success_msg");
-    res.locals.erro_msg = req.flash("erro_msg");
-    res.locals.error = req.flash("error");
-    next()
+  cookieSession({
+    keys: ['digaamigoeentre']
   })
+);
+
+app.use(expressLayouts);
+//sessão
+app.use(session({
+  secret: "feiralovelace",
+  resave: true,
+  saveUninitialized: true
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash())
+//middleware
+app.use((req, res, next) => {
+  res.locals.suceess_msg = req.flash("success_msg");
+  res.locals.erro_msg = req.flash("erro_msg");
+  res.locals.error = req.flash("error");
+  next()
+})
 
 mongoose.connect(
     process.env.DATABASEURL,
