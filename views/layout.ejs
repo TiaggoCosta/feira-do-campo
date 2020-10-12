@@ -46,6 +46,10 @@
 
    <main>
      <div class="container">
+
+      <% if (error.length > 0) {%>
+        <div class="alert alert-danger mt-3"><%= error %></div>
+      <% } %>
        
       <%- body %>
      </div>
