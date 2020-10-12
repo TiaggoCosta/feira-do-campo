@@ -10,9 +10,6 @@ module.exports = function(passport){
   console.log('Chegou no auth');
   passport.use(new localStrategy({usernameField: 'email'}, (email, senha, done) => {
 
-    console.log(email);
-    console.log(senha);
-
     User.findOne({email: email}).then((user) => {
       if(!user){
         return done(null, false, {message: "Esta conta não existe"});

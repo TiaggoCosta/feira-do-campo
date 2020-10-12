@@ -25,26 +25,25 @@
             <a href="/" class="nav-item nav-link active">Home</a>
         </div>
         <ul class="navbar-nav">
-          <% if(req.user.isProdutor) { %>
+          <% if(user_global.isProdutor) { %>
             <li class="nav-item">
               <a href="/admin/products/" class="nav-link">Gerenciar Produtos</a>
             </li>
+            <% if (user_global) {%>
+            <li class="nav-item">
+              <a href="/user" class="nav-link">Meus Dados</a>
+            </li>
+            <li class="nav-item">
+              <a href="/login/Logout" class="nav-link">Logout</a>
+            </li>
+            <% } else {%>
+            <li class="nav-item">
+              <a href="/register" class="nav-link">Cadastrar</a>
+            </li>
+            <li class="nav-item">
+              <a href="/login" class="nav-link">Login</a>
+            </li>
             <% } %>
-            
-            <% if(req.user) { %>
-              <li class="nav-item">
-                <a href="/user" class="nav-link">Meus Dados</a>
-              </li>
-            <% } else { %>
-              <li class="nav-item">
-                <a href="/register" class="nav-link">Cadastrar</a>
-              </li>
-
-              <li class="nav-item">
-                <a href="/login" class="nav-link">Login</a>
-              </li>
-            <% } %>
-            
             <li>
               <a href="/cart" class="nav-link"><i class="fas fa-shopping-cart"></i></a>
             </li>
@@ -70,6 +69,10 @@
 
    <main>
      <div class="container">
+
+      <% if (error.length > 0) {%>
+        <div class="alert alert-danger mt-3"><%= error %></div>
+      <% } %>
        
       <%- body %>
      </div>

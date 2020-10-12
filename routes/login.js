@@ -16,4 +16,10 @@ router.post("/", (req, res, next) => {
   })(req, res, next)
 })
 
+router.get("/logout", (req, res) => {
+  req.logout();
+  console.log("Deslogado com sucesso");
+  res.redirect("/");
+})
+
 module.exports = router;

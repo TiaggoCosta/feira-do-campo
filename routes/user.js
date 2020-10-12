@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const User = require('../models/user');
+const {isAuthenticated} = require('../helpers/isAuthenticated');
 
 // INDEX - GET to show view for editing a user
 router.get("/", function(req, res){
@@ -20,7 +21,7 @@ router.get("/", function(req, res){
 });
 
 // UPDATE - update a user
-router.put('/', (req, res) => {
+router.put('/', isAuthenticated, (req, res) => {
   var userId;
   if(!req.user){
     res.redirect('/login');
