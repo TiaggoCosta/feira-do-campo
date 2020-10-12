@@ -4,7 +4,7 @@ const User = require('../models/user');
 
 // INDEX - GET to show view for editing a user
 router.get("/", function(req, res){
-  const userId = '5f83ab4acdb69d284499bf21';
+  const userId = req.user._id;
   User.findById(userId, (err, foundUser) => {
     if(err){
       console.log('Error getting user from DB');
@@ -15,7 +15,7 @@ router.get("/", function(req, res){
 
 // UPDATE - update a user
 router.put('/', (req, res) => {
-  const userId = '5f83ab4acdb69d284499bf21';
+  const userId = req.user._id;
 
   const { firstName, lastName, password } = req.body;
   const user = { firstName, lastName };
