@@ -15,22 +15,25 @@ router.post('/', (req, res) => {
   User.findOne({ email: newUser.email }, (err, foundUser) => {
     if(err){
       console.log(err);
-      console.log('Um erro inesperado aconteceu, entre em contato para assitência!');
-      res.redirect('/register');
+      console.log("Erro ao acessar o banco de dados.");
+      req.flash("error", "Um erro inesperado aconteceu, entre em contato para assitência!");
+      res.redirect('/');
     }
 
     if (!foundUser) {
-      console.log('Usuário não encontrado, cadastrando...');
+      console.log("Usuário não encontrado, cadastrando...");
       User.create(newUser, (err, createdUser) => {
         if(err) {
-          console.log('Erro ao cadastrar usuário, entre em contato para assitência!');
+          console.log("Erro ao cadastrar usuário no banco de dados.");
+          req.flash("error", "Erro ao cadastrar usuário, entre em contato para assitência!");
           console.log(err);
         }
         console.log("Usuário criado, id: " + createdUser.id);
-        res.redirect('/');
+        req.flash("success", "Obrigado por se registrar, seu usuário foi criado com sucesso!\nFaça o login para entrar.");
+        res.redirect('/login');
       });
     } else {
-      console.log("O e-mail entrado já está cadastrado!\nId:" + foundUser.id);
+      console.log("O e-mail informado já está cadastrado\nId:" + foundUser.id);
       req.flash("error", "Este e-mail já está cadastrado!");
       res.redirect("back");
     }
