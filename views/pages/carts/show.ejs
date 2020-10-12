@@ -1,24 +1,59 @@
 <%- contentFor('body') %>
 
-<div class="container-fluid mt-2">
-  <div class="row justify-content-center">
-    <div class="d-flex show-product">
-      <div class="card mb-3 mx-auto">
-        <img class="card-img-top img-card-show" src="<%=  %>" alt="<%=  %>">
-        <div class="card-body">
-          <p class="float-right">
-            R$<%=  %>
-          </p>
-          <h5 class="card-title"><%=  %></h5>
-          <% for (product of products) { %>
-          <p class="card-text"><%= product.title %></p>
-          <p class="card-text"><%= product.quantity %></p>
-          <p class="card-text"><%= product.price %></p>
-          <% } %>
-        </div>
+<div class="row">
+  <div class="col-lg-8">
+    <div class="mb-3">
+      <div class="pt-4 wish-list">
+        <h5 class="mb-4">Carrinho (<%= products.length %> itens)</h5>
+        <% for (product of products) { %>
+          <div class="row mb-4">
+            <div class="col-md-5 col-lg-3 col-xl-3">
+              <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                <a href="/admin/products/<%= product.id %>">
+                  <div class="mask">
+                    <img class="img-fluid img-thumbnail" src="<%= product.image %>">
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-7 col-lg-9 col-xl-9">
+              <div>
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <h5><%= product.title %></h5>
+                    <p>Quantidade: <%= product.quantity %></p>
+                    <p>Valor Unitário R$ <%= product.price %></p>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3"><i class="fas fa-trash-alt mr-1"></i> Remover </a>
+                  </div>
+                  <p class="mb-0"><span><strong id="summary">R$ <%= product.price *  product.quantity %></strong></span></p class="mb-0">
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr class="mb-4">
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="mb-3">
+      <div class="pt-4">
+        <h5 class="mb-3">Total</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+            Total <% var total = products.reduce((acumulador, product) => {
+                return acumulador += product.price * product.quantity;
+              }, 0)%>
+            <span>R$ <%= total.toFixed(2)%></span>
+          </li>
+        </ul>
+        <button type="button" class="btn btn-primary btn-block mt-3">Finalizar</button>
       </div>
     </div>
   </div>
 </div>
-
-  
