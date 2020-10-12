@@ -54,4 +54,16 @@ router.get('/', async (req, res) => {
   
 });
 
+// Receive a post request to delete an item from a cart
+router.delete('/products/:id', async (req, res) => {
+  
+  await cartsRepo.findByIdAndUpdate(
+    req.session.cartId, { 
+      $pull: { "items": { productId: req.params.id } } 
+    }, { safe: true, upsert: true }
+  );
+    
+  res.redirect('/cart');
+});
+
 module.exports = router;
