@@ -1,13 +1,9 @@
 const localStrategy = require("passport-local").Strategy
 const mongoose = require("mongoose");
-
-//verificar
-const bcrypt = require("bcryptjs");
-
 const User = require('../models/user');
 
 module.exports = function(passport){
-  console.log('Chegou no auth');
+
   passport.use(new localStrategy({usernameField: 'email'}, (email, senha, done) => {
 
     User.findOne({email: email}).then((user) => {
