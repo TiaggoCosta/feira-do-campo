@@ -3,7 +3,7 @@ module.exports = {
         if(req.isAuthenticated()){
             return next();
         }
-        req.flash("error_msg", "Você precisa realizar login");
+        req.flash("error", "Você precisa realizar login");
         req.redirect("/");
     },
 
@@ -11,7 +11,7 @@ module.exports = {
         if(req.isAuthenticated() && req.user.isPodutor){
             return next();
         }
-        req.flash("error_msg", "Você precisa ser um produtor");
+        req.flash("error", "Você precisa ser um produtor");
         req.redirect("/");
     }
 }

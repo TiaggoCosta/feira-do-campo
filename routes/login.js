@@ -8,6 +8,7 @@ router.get("/", function(req, res){
   res.render("pages/login"); 
 });
 
+//POST authenticate
 router.post("/", (req, res, next) => {
   passport.authenticate("local", {
     successRedirect: "/",
@@ -16,8 +17,10 @@ router.post("/", (req, res, next) => {
   })(req, res, next)
 })
 
+// GET logout
 router.get("/logout", (req, res) => {
   req.logout();
+  req.flash("success", "Deslogado com sucesso!")
   console.log("Deslogado com sucesso");
   res.redirect("/");
 })
