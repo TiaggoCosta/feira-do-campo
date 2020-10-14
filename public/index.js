@@ -12,24 +12,4 @@ $(".add-to-cart").click(function(eventObject) {
   .catch(function (error) {
     console.log(error);
   });
-  /* $.ajax({​​
-    global: false,
-    type: 'POST',
-    url: '/products',
-    dataType: 'html',
-    data: {​​
-      productId: productId
-    }​​,
-    success: function (result) {​​
-        console.log(result);
-    }​​,
-    error: function (request, status, error) {​​
-        serviceError();
-    }​​
-  }​​); */
-})
-/* function addToCart(eventObject) {
-  Window.alert(this);
-  eventObject.preventDefault();
   
-} */
