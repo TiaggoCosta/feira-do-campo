@@ -1,7 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const User = require('../models/user');
-const {isAuthenticated} = require('../helpers/isAuthenticated');
+const {isAuthenticated} = require('../middlewares/isAuthenticated');
 
 // INDEX - GET to show view for editing a user
 router.get("/", function(req, res){

@@ -12,7 +12,7 @@ const cookieSession = require('cookie-session');
 const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
-require("./config/auth")(passport);
+require("./controller/auth")(passport);
 const indexRoutes = require('./routes/index');
 const adminProductsRoutes = require('./routes/products');
 const cartsRoutes = require('./routes/carts');
