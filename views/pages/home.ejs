@@ -33,9 +33,9 @@
                 <button type="button" class="btn btn-success button-visualizar-home"data-toggle="tooltip" data-placement="top" title="Clique para mais detalhes">Visualizar</button>
               </a>
               <footer class="card-footer">
-                <form action="/cart/products" method="POST">
+                <form>
                   <input hidden value="<%= product.id %>" name="productId" />
-                  <button class="button has-icon is-inverted">
+                  <button id="btn-add-to-cart" class="button has-icon is-inverted">
                     <i class="fa fa-shopping-cart"></i> Add to cart
                   </button>
                 </form>

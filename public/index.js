@@ -1,0 +1,18 @@
+$("btn-add-to-cart").click(function(eventObject) {​​
+  eventObject.preventDefault();
+  $.ajax({​​
+    global: false,
+    type: 'POST',
+    url: '/products',
+    dataType: 'html',
+    data: {​​
+      productId: productId
+    }​​,
+    success: function (result) {​​
+        console.log(result);
+    }​​,
+    error: function (request, status, error) {​​
+        serviceError();
+    }​​
+  }​​);
+})
