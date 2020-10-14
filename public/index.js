@@ -12,4 +12,4 @@ $(".add-to-cart").click(function(eventObject) {
   .catch(function (error) {
     console.log(error);
   });
-  
+})
