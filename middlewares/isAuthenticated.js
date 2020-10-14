@@ -4,7 +4,7 @@ module.exports = {
             return next();
         }
         req.flash("error", "Você precisa realizar login");
-        req.redirect("/");
+        res.redirect("/");
     },
 
     isProdutor: function(req, res, next) {
