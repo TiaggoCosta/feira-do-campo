@@ -4,13 +4,9 @@ const User = require('../models/user');
 const {isAuthenticated} = require('../middlewares/isAuthenticated');
 
 // INDEX - GET to show view for editing a user
-router.get("/", function(req, res){
+router.get("/", isAuthenticated, function(req, res){
   var userId;
-  if(!req.user){
-    res.redirect('/login');
-  } else {
     userId = req.user._id;
-  }
 
   User.findById(userId, (err, foundUser) => {
     if(err){
@@ -23,12 +19,8 @@ router.get("/", function(req, res){
 // UPDATE - update a user
 router.put('/', isAuthenticated, (req, res) => {
   var userId;
-  if(!req.user){
-    res.redirect('/login');
-  } else {
-    userId = req.user._id;
-  }
-
+  userId = req.user._id;
+    
   const { firstName, lastName, password } = req.body;
   const user = { firstName, lastName };
 
