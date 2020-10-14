@@ -31,7 +31,7 @@ router.post('/products/:id', async (req, res) => {
   }
   cart.save();
 
-  res.end();
+  res.send();
 });
 
 // Receive a GET request to show all items in cart
