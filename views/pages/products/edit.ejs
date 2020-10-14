@@ -2,7 +2,7 @@
 <div class="columns is-centered">
   <div class="container col-md-6 offset-md-3">
     <h1 class="mb-4 mt-5">Editar Produto</h1>
-    <form method="POST" action="/admin/products/<%=product.id%>?_method=PUT" enctype="multipart/form-data">
+    <form method="POST" action="/products/<%=product.id%>?_method=PUT" enctype="multipart/form-data">
       <div class="form-group">
         <label for="nomeProduto">Nome</label>
         <input value="<%= product.title %>" type="text" class="form-control" id="nomeProduto" name="title" placeholder="Digite o nome do produto">

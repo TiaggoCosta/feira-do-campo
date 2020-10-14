@@ -6,7 +6,7 @@
 
   <div class="d-flex mb-1" >
     <h4>Produtos Cadastrados</h4>
-    <a href="/admin/products/new" class="ml-auto btn btn-success">
+    <a href="/products/new" class="ml-auto btn btn-success">
       <i class="fas fa-plus"></i> Adicionar
     </a>
   </div>
@@ -25,14 +25,14 @@
           <td><%= product.title %></td>
           <td><%= product.price %></td>
           <td>
-            <a href="/admin/products/<%=product.id%>/edit">
+            <a href="/products/<%=product.id%>/edit">
               <button class="btn btn-primary">
                 <i class="far fa-edit"></i> Editar
               </button>
             </a>
           </td>
           <td>
-            <form action="/admin/products/<%=product.id%>?_method=DELETE" method="POST">
+            <form action="/products/<%=product.id%>?_method=DELETE" method="POST">
               <button class="btn btn-danger">
                 <i class="far fa-trash-alt"></i> Deletar
               </button>

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Product = require('../../models/product');
+const Product = require('../models/product');
 
 // INDEX - GET all products
 router.get('/', (req, res) => {
@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
     if(err) {
       console.log(err);
     }
-    res.redirect('/admin/products/' + createdProduct.id);
+    res.redirect('/products/' + createdProduct.id);
   });
 });
 
@@ -48,7 +48,7 @@ router.put('/:id', (req, res) => {
     if(err) {
       console.log(err);
     } 
-    res.redirect('/admin/products/' + updatedProduct.id);
+    res.redirect('/products/' + updatedProduct.id);
   });
 });
 
@@ -58,7 +58,7 @@ router.delete('/:id', (req, res) => {
     if(err) {
       console.log(err);
     } 
-    res.redirect('/admin/products/');
+    res.redirect('/products/');
   });
 });
 
