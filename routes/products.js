@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/product');
-const { isPodutor } = require('../middlewares/isAuthenticated');
+const { isProdutor } = require('../middlewares/isAuthenticated');
 
 // INDEX - GET all products
-router.get('/', isPodutor, (req, res) => {
+router.get('/', isProdutor, (req, res) => {
   Product.find({}, (err, products) => {
     if(err){
       console.log(err);
@@ -16,12 +16,12 @@ router.get('/', isPodutor, (req, res) => {
 });
 
 // NEW - GET to show view for adding new product
-router.get('/new', isPodutor, (req, res) => {
+router.get('/new', isProdutor, (req, res) => {
   res.render('pages/products/new');
 });
 
 // CREATE - add new product to DB
-router.post('/', isPodutor, (req, res) => {
+router.post('/', isProdutor, (req, res) => {
   const { title, price, image, description } = req.body;
   const newProduct = { title, price, description };
   if(image.replace(/\s+/g,'') !== '') { newProduct.image = image };
@@ -34,14 +34,14 @@ router.post('/', isPodutor, (req, res) => {
 });
 
 // EDIT - GET to show view for editing a product
-router.get('/:id/edit', isPodutor, (req, res) => {
+router.get('/:id/edit', isProdutor, (req, res) => {
   Product.findById(req.params.id, (err, foundProduct) => {
     res.render('pages/products/edit', { product: foundProduct });
   });
 });
 
 // UPDATE - update some product
-router.put('/:id', isPodutor, (req, res) => {
+router.put('/:id', isProdutor, (req, res) => {
   const { title, price, image, description } = req.body;
   const product = { title, price, description };
   if(image.replace(/\s+/g,'') !== '') { product.image = image };
@@ -54,7 +54,7 @@ router.put('/:id', isPodutor, (req, res) => {
 });
 
 // DELETE the product with received id
-router.delete('/:id', isPodutor, (req, res) => {
+router.delete('/:id', isProdutor, (req, res) => {
   Product.findByIdAndRemove(req.params.id, (err) => {
     if(err) {
       console.log(err);

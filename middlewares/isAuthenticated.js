@@ -7,8 +7,8 @@ module.exports = {
         req.redirect("/");
     },
 
-    isPodutor: function(req, res, next) {
-        if(req.isAuthenticated() && req.user.isPodutor){
+    isProdutor: function(req, res, next) {
+        if(req.isAuthenticated() && req.user.isProdutor){
             return next();
         }
         req.flash("error", "Você precisa ser um produtor");
