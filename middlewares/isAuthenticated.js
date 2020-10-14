@@ -12,6 +12,6 @@ module.exports = {
             return next();
         }
         req.flash("error", "Você precisa ser um produtor");
-        req.redirect("/");
+        res.redirect("/");
     }
 }

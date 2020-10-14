@@ -45,7 +45,7 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error");
   res.locals.success = req.flash("success");
   res.locals.info = req.flash("info");
-  res.locals.user_global = req.user || null;
+  res.locals.user_global = req.user;
   next()
 });
 
