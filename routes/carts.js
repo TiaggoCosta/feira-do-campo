@@ -6,9 +6,11 @@ const productsRepo = require('../models/product');
 const router = express.Router();
 
 // Receive a post request to add an item to a cart
-router.post('/products', async (req, res) => {
+router.post('/products/:id', async (req, res) => {
   // Figure out the cart!
   let cart;
+  const productId = req.params.id;
+  console.log(productId)
   if (!req.session.cartId) {
     // We dont have a cart, we need to create one,
     // and store the cart id on the req.session.cartId
@@ -20,13 +22,13 @@ router.post('/products', async (req, res) => {
     cart = await cartsRepo.findById(req.session.cartId);
   }
 
-  const existingItem = cart.items.find(item => item.productId === req.body.productId);
+  const existingItem = cart.items.find(item => item.productId === productId);
   if (existingItem) {
     // increment quantity and save cart
     existingItem.quantity++;
   } else {
     // add new product id to items array
-    cart.items.push({ productId: req.body.productId, quantity: 1 });
+    cart.items.push({ productId: productId, quantity: 1 });
   }
   cart.save();
 
