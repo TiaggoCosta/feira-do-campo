@@ -10,7 +10,6 @@ router.post('/products/:id', async (req, res) => {
   // Figure out the cart!
   let cart;
   const productId = req.params.id;
-  console.log(productId)
   if (!req.session.cartId) {
     // We dont have a cart, we need to create one,
     // and store the cart id on the req.session.cartId
@@ -32,7 +31,7 @@ router.post('/products/:id', async (req, res) => {
   }
   cart.save();
 
-  res.send();
+  res.end();
 });
 
 // Receive a GET request to show all items in cart
