@@ -32,7 +32,7 @@ router.post('/products/:id', async (req, res) => {
   }
   cart.save();
 
-  // res.redirect('/');
+  res.send();
 });
 
 // Receive a GET request to show all items in cart
