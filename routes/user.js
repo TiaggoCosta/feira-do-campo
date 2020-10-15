@@ -10,6 +10,7 @@ router.get("/", isAuthenticated, function(req, res){
 
   User.findById(userId, (err, foundUser) => {
     if(err){
+      req.flash("error", "Um erro inesperado aconteceu, entre em contato para assitência!");
       console.log('Error getting user from DB');
     }
     res.render('pages/users/edit', { user: foundUser });
@@ -30,7 +31,9 @@ router.put('/', isAuthenticated, (req, res) => {
   User.findByIdAndUpdate(userId, user, (err, updatedUser) => {
     if(err) {
       console.log(err);
+      req.flash("error", "Ocorreu um erro ao editar os dados, entre em contato para assitência!");
     }
+    req.flash("success", "Dados atualizados com sucesso!");
     console.log('User updated successfully, id: ' + updatedUser.id);
     res.redirect('/user');
   });
