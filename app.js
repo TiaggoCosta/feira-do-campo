@@ -14,7 +14,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 require("./controller/auth")(passport);
 const indexRoutes = require('./routes/index');
-const adminProductsRoutes = require('./routes/products');
+const productsRoutes = require('./routes/products');
 const cartsRoutes = require('./routes/carts');
 const userRoutes = require('./routes/user');
 
@@ -60,7 +60,7 @@ mongoose.connect(
 );
 
 app.use('/', indexRoutes);
-app.use('/products', adminProductsRoutes);
+app.use('/products', productsRoutes);
 app.use('/cart', cartsRoutes);
 app.use('/user', userRoutes);
 
