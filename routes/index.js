@@ -22,7 +22,7 @@ router.get("/register", function(req, res){
   
   // CREATE - add new user to DB
   router.post('/register', (req, res) => {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, repeatedPassword } = req.body;
     const newUser = { firstName, lastName, email, password };
   
     User.findOne({ email: newUser.email }, (err, foundUser) => {
@@ -34,17 +34,23 @@ router.get("/register", function(req, res){
       }
   
       if (!foundUser) {
-        console.log("Usuário não encontrado, cadastrando...");
-        User.create(newUser, (err, createdUser) => {
-          if(err) {
-            console.log("Erro ao cadastrar usuário no banco de dados.");
-            req.flash("error", "Erro ao cadastrar usuário, entre em contato para assitência!");
-            console.log(err);
-          }
-          console.log("Usuário criado, id: " + createdUser.id);
-          req.flash("success", "Obrigado por se registrar, seu usuário foi criado com sucesso!\nFaça o login para entrar.");
-          res.redirect('/login');
-        });
+        if(repeatedPassword != password ){
+          console.log("Senhas incorretas.");
+          req.flash("error", "As senhas informadas diferem, verifique as informações inseridas!");
+          res.redirect('/register');
+        } else {
+          console.log("Usuário não encontrado, cadastrando...");
+          User.create(newUser, (err, createdUser) => {
+            if(err) {
+              console.log("Erro ao cadastrar usuário no banco de dados.");
+              req.flash("error", "Erro ao cadastrar usuário, entre em contato para assitência!");
+              console.log(err);
+            }
+            console.log("Usuário criado, id: " + createdUser.id);
+            req.flash("success", "Obrigado por se registrar, seu usuário foi criado com sucesso!\nFaça o login para entrar.");
+            res.redirect('/login');
+          }); 
+        }
       } else {
         console.log("O e-mail informado já está cadastrado\nId:" + foundUser.id);
         req.flash("error", "Este e-mail já está cadastrado!");
