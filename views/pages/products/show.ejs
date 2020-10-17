@@ -6,16 +6,17 @@
       <div class="card mb-3 mx-auto">
         <img class="card-img-top img-card-show" src="<%= product.image %>" alt="<%= product.title %>">
         <div class="card-body">
-          <p class="float-right">
-            R$<%= product.price %>
-          </p>
-          <h5 class="card-title"><%= product.title %></h5>
-          <p class="card-text"><%= product.description %></p>
-          
+          <div class="container-fluid">
+            <div class="row">
+              <h5 class="card-title"><%= product.title %></h5>
+              <div class="col-md h6 mt-1">
+                <p class="card-text text-right"> R$ <%= product.price%></p>
+              </div>
+            </div>
+          </div>
+          <p class="card-text text-justify product-description-home"><%= product.description %></p>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-  
