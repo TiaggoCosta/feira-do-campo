@@ -22,11 +22,20 @@ router.put('/', isAuthenticated, (req, res) => {
   var userId;
   userId = req.user._id;
     
-  const { firstName, lastName, password } = req.body;
+  const { firstName, lastName, password, repeatedPassword } = req.body;
   const user = { firstName, lastName };
 
-  if (password)
-    user.password = password;
+  if (password) {
+    if(repeatedPassword != password ){
+      console.log("Senhas incorretas.");
+      req.flash("error", "As senhas informadas diferem, verifique as informações inseridas!");
+      res.redirect('/user');
+      return;
+    } else {
+      console.log("Entrou no else");
+    user.password = password; 
+    }
+  }
 
   User.findByIdAndUpdate(userId, user, (err, updatedUser) => {
     if(err) {
