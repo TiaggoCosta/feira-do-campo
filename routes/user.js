@@ -32,8 +32,7 @@ router.put('/', isAuthenticated, (req, res) => {
       res.redirect('/user');
       return;
     } else {
-      console.log("Entrou no else");
-    user.password = password; 
+      user.password = password; 
     }
   }
 
