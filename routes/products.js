@@ -5,7 +5,7 @@ const { isProdutor } = require('../middlewares/isAuthenticated');
 
 // INDEX - GET all products
 router.get('/', isProdutor, (req, res) => {
-  Product.find({}, (err, products) => {
+  Product.find({ producer: req.user._id }, (err, products) => {
     if(err){
       console.log(err);
       res.redirect('/');
@@ -24,6 +24,7 @@ router.get('/new', isProdutor, (req, res) => {
 router.post('/', isProdutor, (req, res) => {
   const { title, price, image, description } = req.body;
   const newProduct = { title, price, description };
+  newProduct.producer = req.user._id;
   if(image.replace(/\s+/g,'') !== '') { newProduct.image = image };
   Product.create(newProduct, (err, createdProduct) => {
     if(err) {
