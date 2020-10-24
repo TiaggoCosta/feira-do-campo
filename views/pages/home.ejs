@@ -28,23 +28,21 @@
                 <div class="container-fluid">
                   <div class="row">
                     <h5 class="card-title"><%= product.title %></h5>
-                    <div class="col-md h6 mt-1">
-                      <p class="card-text text-right"> R$ <%= product.price%></p>
-                    </div>
+                  </div>
+                  <div class="row">
+                    <p class="card-text text-right"> R$ <%= product.price%></p>
                   </div>
                 </div>
-                <p class="card-text text-justify product-description-home"><%= product.description %></p>
               </div>
               <footer class="card-footer">
                 <form  class="add-to-cart">
                   <input hidden value="<%= product.id %>" name="productId" />
                   <button class="btn btn-success btn-sm btn-block add-to-cart">
-                    Add to cart <i class="fas fa-shopping-cart"></i>
+                    Comprar <i class="fas fa-shopping-cart"></i>
                   </button>
                 </form>
               </footer>
             </div>
-            
         </div>
 
 <% } %>
