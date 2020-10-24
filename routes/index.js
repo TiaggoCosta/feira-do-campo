@@ -6,13 +6,29 @@ const passport = require('passport');
 
 // HOME
 router.get('/', (req, res) => {
-    Product.find({}, (err, products) => {
-        if(err){
-            console.log(err);
+  if(req.query.search){
+    const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+    Product.find({title: regex}, function(err, products){
+      if(err){
+        console.log(err);
+      } else {
+        if(products.length < 1){
+          req.flash("info", "Nenhum produto encontrado, redirecionando para home.");
+          res.redirect("/");
         } else {
-           res.render('pages/home',{ products });
+          res.render('pages/home', { products });
         }
+      }
     });
+  } else {
+    Product.find({}, (err, products) => {
+      if(err){
+        console.log(err);
+      } else {
+        res.render('pages/home', { products });
+      }
+    });
+  }
 });
 
 // INDEX - GET register form
@@ -80,5 +96,9 @@ router.get("/login", function(req, res){
     console.log("Deslogado com sucesso");
     res.redirect("/");
   });
+
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 module.exports = router;
