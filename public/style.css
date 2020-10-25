@@ -100,8 +100,7 @@
   margin-bottom: 4px;
 }
 
-.product-description-home{
-  max-width: 25ch;
+.product-description-home{ 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
