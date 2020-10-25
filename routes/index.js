@@ -3,6 +3,7 @@ const router  = express.Router();
 const User = require('../models/user');
 const Product = require('../models/product');
 const passport = require('passport');
+const bcrypt = require('bcrypt');
 
 // HOME
 router.get('/', (req, res) => {
@@ -21,42 +22,50 @@ router.get("/register", function(req, res){
   });
   
   // CREATE - add new user to DB
-  router.post('/register', (req, res) => {
+  router.post('/register', async (req, res) => {
+    const saltRounds = 10;
     const { firstName, lastName, email, password, repeatedPassword } = req.body;
-    const newUser = { firstName, lastName, email, password };
-  
-    User.findOne({ email: newUser.email }, (err, foundUser) => {
-      if(err){
-        console.log(err);
-        console.log("Erro ao acessar o banco de dados.");
-        req.flash("error", "Um erro inesperado aconteceu, entre em contato para assitência!");
-        res.redirect('/');
-      }
-  
-      if (!foundUser) {
-        if(repeatedPassword != password ){
-          console.log("Senhas incorretas.");
-          req.flash("error", "As senhas informadas diferem, verifique as informações inseridas!");
-          res.redirect('/register');
-        } else {
-          console.log("Usuário não encontrado, cadastrando...");
-          User.create(newUser, (err, createdUser) => {
-            if(err) {
-              console.log("Erro ao cadastrar usuário no banco de dados.");
-              req.flash("error", "Erro ao cadastrar usuário, entre em contato para assitência!");
-              console.log(err);
-            }
-            console.log("Usuário criado, id: " + createdUser.id);
-            req.flash("success", "Obrigado por se registrar, seu usuário foi criado com sucesso!\nFaça o login para entrar.");
-            res.redirect('/login');
-          }); 
+    const newUser = { firstName, lastName, email };
+    await bcrypt.hash(password, saltRounds, async (err, hash) => {
+      // Store hash in your password DB.
+      newUser.password = hash;
+      console.log(newUser);
+      console.log("novo usuario pronto")
+      User.findOne({ email: newUser.email }, (err, foundUser) => {
+        if(err){
+          console.log(err);
+          console.log("Erro ao acessar o banco de dados.");
+          req.flash("error", "Um erro inesperado aconteceu, entre em contato para assitência!");
+          res.redirect('/');
         }
-      } else {
-        console.log("O e-mail informado já está cadastrado\nId:" + foundUser.id);
-        req.flash("error", "Este e-mail já está cadastrado!");
-        res.redirect("back");
-      }
+    
+        if (!foundUser) {
+          if(repeatedPassword != password ){
+            console.log("Senhas incorretas.");
+            req.flash("error", "As senhas informadas diferem, verifique as informações inseridas!");
+            res.redirect('/register');
+          } else {
+            console.log("Usuário não encontrado, cadastrando...");
+            User.create(newUser, (err, createdUser) => {
+              if(err) {
+                console.log("Erro ao cadastrar usuário no banco de dados.");
+                req.flash("error", "Erro ao cadastrar usuário, entre em contato para assitência!");
+                console.log(err);
+              }
+              console.log("Usuário criado, id: " + createdUser.id);
+              req.flash("success", "Obrigado por se registrar, seu usuário foi criado com sucesso!\nFaça o login para entrar.");
+              res.redirect('/login');
+            }); 
+          }
+        } else {
+          console.log("O e-mail informado já está cadastrado\nId:" + foundUser.id);
+          req.flash("error", "Este e-mail já está cadastrado!");
+          res.redirect("back");
+        }
+      });
     });
+  
+  
   });
 
 // INDEX - GET login form
