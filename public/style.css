@@ -25,16 +25,16 @@
 
 /* Tela de apresentação */
 .header {
-    height: 95vh;
+    height: 45vh;
     background-image: linear-gradient(
         to right bottom, 
         rgb(128, 214, 113, .8), 
         rgb(40, 180, 133, .8)), 
-        url(./imagens/cooperacao.jpg);
+        url(./imagens/feira2.jpg);
     background-size: cover;
     background-position: top;
 
-    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 25vh, 0 100%);
 }
 
 .logo {
@@ -43,7 +43,7 @@
 
 .text-box {
     position: absolute;
-    top: 40%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -55,7 +55,7 @@
 
 .heading-primary-main {
     display: block;
-    font-size: 60px;
+    font-size: 40px;
     font-weight: 400px;
     letter-spacing: 35px;
 }
@@ -100,11 +100,23 @@
   margin-bottom: 4px;
 }
 
-.product-description-home{
-  max-width: 25ch;
+.product-description-home{ 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.product-isAvailable-show{
+  padding-bottom: 4px;
+  padding-top: 4px;
+  margin-bottom: 6px;
+}
+
+.product-isAvailable-index{
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-top-width: 1px;
+  margin-top: 2px;
 }
 
 /* footer */

@@ -13,6 +13,13 @@
                 <p class="card-text text-right"> R$ <%= product.price%></p>
               </div>
             </div>
+            <div class="row product-isAvailable-show">
+                <% if (product.isAvailable) {%>
+                 <p class="badge badge-success card-text text-right product-isAvailable-show">Produto disponível</p>
+                <% } else {%>
+                 <p class="badge badge-danger card-text text-right product-isAvailable-show">Produto indisponível</p>
+                <% }%>
+            </div>
           </div>
           <p class="card-text text-justify product-description-home"><%= product.description %></p>
         </div>

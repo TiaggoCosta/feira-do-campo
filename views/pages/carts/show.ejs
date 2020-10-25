@@ -21,6 +21,11 @@
                 <div class="d-flex justify-content-between">
                   <div>
                     <h5><%= product.title %></h5>
+                      <% if (product.isAvailable) {%>
+                       <p class="badge badge-success card-text text-right product-isAvailable-show">Produto disponível</p>
+                      <% } else {%>
+                       <p class="badge badge-danger card-text text-right product-isAvailable-show">Produto indisponível</p>
+                      <% }%>
                     <p>Quantidade: <%= product.quantity %></p>
                     <p>Valor Unitário R$ <%= product.price %></p>
                   </div>
