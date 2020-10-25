@@ -1,5 +1,6 @@
 const localStrategy = require("passport-local").Strategy
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
 
 module.exports = function(passport){
 
@@ -11,12 +12,16 @@ module.exports = function(passport){
       }
 
       //console.log(user);
-      if(senha == user.password){
-        console.log("Login realizado com sucesso!");
-        return done(null, user);
-      } else {
-        return done (null, false, {message: "A senha está incorreta"});
-      }
+      const saltRounds = 10;
+      bcrypt.compare(senha, user.password, function(err, result) {
+          if(result){
+          console.log("Login realizado com sucesso!");
+          return done(null, user);
+        } else {
+          return done (null, false, {message: "A senha está incorreta"});
+        }
+      })
+      
     })
   }))
 
