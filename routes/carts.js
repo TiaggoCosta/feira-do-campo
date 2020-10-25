@@ -44,11 +44,10 @@ router.get('/', async (req, res) => {
   let products = [];
   
   for (let item of cart.items) {
-    console.log(item.productId);
     let foundProduct = await productsRepo.findById(item.productId);
     if (foundProduct != null){
-      let { id, title, price, image } = foundProduct;
-      let product = { id, title, price, image };
+      let { id, title, price, image, isAvailable } = foundProduct;
+      let product = { id, title, price, image, isAvailable };
       product.quantity = item.quantity;
       products.push(product);
     } else {

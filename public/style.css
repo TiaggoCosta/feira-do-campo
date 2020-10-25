@@ -107,6 +107,19 @@
   white-space: nowrap;
 }
 
+.product-isAvailable-show{
+  padding-bottom: 4px;
+  padding-top: 4px;
+  margin-bottom: 6px;
+}
+
+.product-isAvailable-index{
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-top-width: 1px;
+  margin-top: 2px;
+}
+
 /* footer */
 .footer {
   position: absolute;
