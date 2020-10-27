@@ -36,11 +36,19 @@ router.post('/products/:id', async (req, res) => {
 
 // Receive a GET request to show all items in cart
 router.get('/', async (req, res) => {
-  if (!req.session.cartId) {
+  if (!req.session.cartId && !req.user.idCart) {
     return res.redirect('/');
   }
+  
+  let cartId;
+  if(req.user && req.user.idCart) {
+    cartId = req.user.idCart;
+  } else {
+    cartId = req.session.cartId;
+  }
+  
 
-  const cart = await cartsRepo.findById(req.session.cartId);
+  const cart = await cartsRepo.findById(cartId);
   let products = [];
   
   for (let item of cart.items) {
