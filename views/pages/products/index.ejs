@@ -12,34 +12,38 @@
   </div>
   <table class="table table-striped table-sm">
     <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Preço</th>
-        <th>Disponibilidade</th>
-        <th>Editar</th>
-        <th>Deletar</th>
+      <tr class="row">
+        <th class="col-sm-2">Status</th>
+        <th class="col-sm-4">Nome</th>
+        <th class="col-sm-2">Preço</th>
+        <th class="col-sm-2">Editar</th>
+        <th class="col-sm-2">Deletar</th>
       </tr>
     </thead>
     <tbody>
       <% for (product of products){%>
-        <tr>
-          <td><%= product.title %></td>
-          <td><%= product.price %></td>
-          <td>
-            <% if (product.isAvailable) {%>
-            <p class="badge badge-success card-text text-right product-isAvailable-index">Produto disponível</p>
-           <% } else {%>
-            <p class="badge badge-danger card-text text-right product-isAvailable-index">Produto indisponível</p>
-           <% }%>
+        <tr class="row">
+          <td class="col-sm-2">
+              <form method="POST" action="/products/<%=product.id%>/availability?_method=PUT">
+                <% if (product.isAvailable) {%>
+                <button type="submit" class="btn btn-success dot">
+                </button>
+                <% } else {%>
+                  <button type="submit" class="btn btn-danger dot">
+                  </button>
+                 <% }%>
+              </form>
           </td>
-          <td>
+          <td class="col-sm-4"><%= product.title %></td>
+          <td class="col-sm-2"><%= product.price %></td>
+          <td class="col-sm-2 align-text-center">
             <a href="/products/<%=product.id%>/edit">
               <button class="btn btn-primary">
                 <i class="far fa-edit"></i> Editar
               </button>
             </a>
           </td>
-          <td>
+          <td class="col-sm-2">
             <form action="/products/<%=product.id%>?_method=DELETE" method="POST">
               <button class="btn btn-danger">
                 <i class="far fa-trash-alt"></i> Deletar

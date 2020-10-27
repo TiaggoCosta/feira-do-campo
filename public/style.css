@@ -112,11 +112,12 @@
   margin-bottom: 6px;
 }
 
-.product-isAvailable-index{
-  padding-bottom: 10px;
-  padding-top: 10px;
-  border-top-width: 1px;
-  margin-top: 2px;
+.dot {
+  height: 25px;
+  width: 25px;
+  /* background-color: #bbb; */
+  border-radius: 50%;
+  display: inline-block;
 }
 
 /* footer */

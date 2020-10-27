@@ -54,6 +54,18 @@ router.put('/:id', isProdutor, (req, res) => {
   });
 });
 
+router.put('/:id/availability', isProdutor, (req, res) => {
+  Product.findById(req.params.id, (err, foundProduct) => {
+    foundProduct.isAvailable = !foundProduct.isAvailable;
+    foundProduct.save(function(err){
+      if(err){
+        console.log(err);
+      }
+      res.redirect('/products/');
+    })
+  });
+});
+
 // DELETE the product with received id
 router.delete('/:id', isProdutor, (req, res) => {
   Product.findByIdAndRemove(req.params.id, (err) => {
