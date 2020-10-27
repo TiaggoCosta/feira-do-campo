@@ -4,6 +4,7 @@ const User = require('../models/user');
 const Product = require('../models/product');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
+const cartsRepo = require('../models/cart');
 
 // HOME
 router.get('/', (req, res) => {
@@ -91,10 +92,40 @@ router.get("/login", function(req, res){
   
   //POST authenticate
   router.post("/login", (req, res, next) => {
-    passport.authenticate("local", {
-      successRedirect: "/",
-      failureRedirect: "/login",
-      failureFlash: true
+    passport.authenticate("local", async(err, user) => {
+      if(user) {
+          if(!user.idCart) {
+            if(req.session.cartId) {
+              user.idCart = req.session.cartId;
+              req.session.cartId = null;
+            } else {
+              user.idCart = await cartsRepo.create( { items: [] } );
+            }
+          } else {
+            if(req.session.cartId) {
+              let sessionCart = await cartsRepo.findById(req.session.cartId);
+              let userCart = await cartsRepo.findById(user.idCart);
+              sessionCart.items.forEach(item => {
+                const existingItem = userCart.items.find(userItem => item.productId === userItem.productId);
+                if (existingItem) {
+                  // increment quantity and save cart
+                  existingItem.quantity += item.quantity;
+                } else {
+                  // add new product id to items array
+                  userCart.items.push({ productId: item.productId, quantity: item.quantity });
+                }
+              });
+              userCart.save();
+              req.session.cartId = null;
+            } 
+          }
+          user.save();
+        }
+        req.logIn(user, function(err) {
+          if(err) return res.rdirect('/login');
+          return res.redirect('/');
+        })
+        
     })(req, res, next)
   });
   

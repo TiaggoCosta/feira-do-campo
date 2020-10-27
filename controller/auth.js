@@ -13,9 +13,8 @@ module.exports = function(passport){
 
       //console.log(user);
       const saltRounds = 10;
-      bcrypt.compare(senha, user.password, function(err, result) {
+      bcrypt.compare(senha, user.password, async(err, result) => {
           if(result){
-          console.log("Login realizado com sucesso!");
           return done(null, user);
         } else {
           return done (null, false, {message: "A senha está incorreta"});
