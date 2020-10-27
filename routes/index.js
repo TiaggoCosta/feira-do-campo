@@ -94,24 +94,32 @@ router.get("/login", function(req, res){
   router.post("/login", (req, res, next) => {
     passport.authenticate("local", async(err, user) => {
       if(user) {
-      console.log("Login realizado com sucesso!");
-      console.log(user)
           if(!user.idCart) {
-            console.log('sem carrinho')
             if(req.session.cartId) {
               user.idCart = req.session.cartId;
               req.session.cartId = null;
-              console.log('carrinho trocado')
             } else {
-              console.log('carrinho criado')
               user.idCart = await cartsRepo.create( { items: [] } );
             }
           } else {
-            console.log("merge carrinhos")
+            if(req.session.cartId) {
+              let sessionCart = await cartsRepo.findById(req.session.cartId);
+              let userCart = await cartsRepo.findById(user.idCart);
+              sessionCart.items.forEach(item => {
+                const existingItem = userCart.items.find(userItem => item.productId === userItem.productId);
+                if (existingItem) {
+                  // increment quantity and save cart
+                  existingItem.quantity += item.quantity;
+                } else {
+                  // add new product id to items array
+                  userCart.items.push({ productId: item.productId, quantity: item.quantity });
+                }
+              });
+              userCart.save();
+              req.session.cartId = null;
+            } 
           }
-          console.log(user)
-          console.log(req.session.cartId)
-          
+          user.save();
         }
         req.logIn(user, function(err) {
           if(err) return res.rdirect('/login');

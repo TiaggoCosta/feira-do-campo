@@ -8,17 +8,28 @@ const router = express.Router();
 // Receive a post request to add an item to a cart
 router.post('/products/:id', async (req, res) => {
   // Figure out the cart!
+  let cartId;
   let cart;
+  if(req.user && req.user.idCart) {
+    cartId = req.user.idCart;
+  } else {
+    cartId = req.session.cartId;
+  }
+
   const productId = req.params.id;
-  if (!req.session.cartId) {
+  if (!cartId) {
     // We dont have a cart, we need to create one,
     // and store the cart id on the req.session.cartId
     // property
     cart = await cartsRepo.create( { items: [] } );
-    req.session.cartId = cart.id;
+    if(req.user){
+      req.user.idCart = cart.id;
+    } else {
+      req.session.cartId = cart.id;
+    }
   } else {
     // We have a cart! Lets get it from the repository
-    cart = await cartsRepo.findById(req.session.cartId);
+    cart = await cartsRepo.findById(cartId);
   }
 
   const existingItem = cart.items.find(item => item.productId === productId);
@@ -30,23 +41,21 @@ router.post('/products/:id', async (req, res) => {
     cart.items.push({ productId: productId, quantity: 1 });
   }
   cart.save();
-
   res.send();
 });
 
 // Receive a GET request to show all items in cart
 router.get('/', async (req, res) => {
-  if (!req.session.cartId && !req.user.idCart) {
+  if (!req.session.cartId && (!req.user || !req.user.idCart)) {
     return res.redirect('/');
   }
-  
   let cartId;
+  
   if(req.user && req.user.idCart) {
     cartId = req.user.idCart;
   } else {
     cartId = req.session.cartId;
   }
-  
 
   const cart = await cartsRepo.findById(cartId);
   let products = [];
@@ -69,9 +78,16 @@ router.get('/', async (req, res) => {
 
 // Receive a post request to delete an item from a cart
 router.delete('/products/:id', async (req, res) => {
+  let cartId;
   
+  if(req.user && req.user.idCart) {
+    cartId = req.user.idCart;
+  } else {
+    cartId = req.session.cartId;
+  }
+
   await cartsRepo.findByIdAndUpdate(
-    req.session.cartId, { 
+    cartId, { 
       $pull: { "items": { productId: req.params.id } } 
     }, { safe: true, upsert: true }
   );
