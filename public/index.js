@@ -13,3 +13,7 @@ $(".add-to-cart").click(function(eventObject) {
     console.log(error);
   });
 })
+
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
