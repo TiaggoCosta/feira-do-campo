@@ -10,7 +10,7 @@ const cartsRepo = require('../models/cart');
 router.get('/', (req, res) => {
   if(req.query.search){
     const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-    Product.find({title: regex}, function(err, products){
+    Product.find({title: regex, isAvailable: true}, function(err, products){
       if(err){
         console.log(err);
       } else {
@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
       }
     });
   } else {
-    Product.find({}, (err, products) => {
+    Product.find({isAvailable: true}, (err, products) => {
       if(err){
         console.log(err);
       } else {
