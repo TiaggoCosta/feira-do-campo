@@ -17,7 +17,7 @@ const indexRoutes = require('./routes/index');
 const productsRoutes = require('./routes/products');
 const cartsRoutes = require('./routes/carts');
 const userRoutes = require('./routes/user');
-const orderRoutes = require('./routes/order');
+//const orderRoutes = require('./routes/order');
 
 app.set('view engine', 'ejs') ;
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -64,7 +64,7 @@ app.use('/', indexRoutes);
 app.use('/products', productsRoutes);
 app.use('/cart', cartsRoutes);
 app.use('/user', userRoutes);
-app.use('/order', orderRoutes);
+//app.use('/order', orderRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log('A Feira do Campo está no ar!');

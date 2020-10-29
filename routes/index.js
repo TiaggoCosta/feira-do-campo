@@ -99,7 +99,8 @@ router.get("/login", function(req, res){
               user.idCart = req.session.cartId;
               req.session.cartId = null;
             } else {
-              user.idCart = await cartsRepo.create( { items: [] } );
+              const newCart = await cartsRepo.create( { items: [] } );
+              user.idCart = newCart._id;
             }
           } else {
             if(req.session.cartId) {
