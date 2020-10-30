@@ -5,6 +5,7 @@
     <div class="mb-3">
       <div class="pt-4 wish-list">
         <h5 class="mb-4">Carrinho (<%= products.length %> itens)</h5>
+        <form action="/order/" method="post">
         <% for (product of products) { %>
           <div class="row mb-4">
             <div class="col-md-5 col-lg-3 col-xl-3">
@@ -46,6 +47,7 @@
           </div>
           <hr class="mb-4">
         <% } %>
+      </form>
       </div>
     </div>
   </div>
@@ -62,7 +64,7 @@
             <span>R$ <%= total.toFixed(2)%></span>
           </li>
         </ul>
-        <button type="button" class="btn btn-primary btn-block mt-3">Finalizar</button>
+        <button type="submit" formaction="/order/" class="btn btn-primary btn-block mt-3">Finalizar</button>
       </div>
     </div>
   </div>
