@@ -6,14 +6,29 @@ const router = express.Router();
 
 // Receive a post request to create new order
 router.post('/', async (req, res) => {
-    /* const { order } = req.body;
-
-    orderRepo.create(order, (err, createdOrder) => {
-        if(err) {
-            console.log(err);
+    const { product } = req.body;
+    
+    let orders = Object.values(product.reduce((order, {producer, ...props}) => {
+        if (!order[producer]) {
+            order[producer] = Object.assign({}, {producer,products : [props]});
+        } else {
+            order[producer].products.push(props);
         }
-    });  */ 
-    console.log(req.body)
+        return order;
+    }, {}));
+
+    orders.forEach(order => {
+        order.costumer = req.user._id;
+        
+        orderRepo.create(order, (err, createdOrder) => {
+            if(err) {
+                console.log(err);
+            } else {
+                console.log(createdOrder);
+            }
+        });
+    });
+    
     res.redirect('/');
 });
 
