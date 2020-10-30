@@ -7,12 +7,8 @@
     <div class="mb-3">
       <div class="pt-4 wish-list">
         <h5 class="mb-4">Carrinho (<%= products.length %> itens)</h5>
-        <form action="/order/" method="POST" id="form-send-order">
         <% for (product of products) { %>
           <div class="row mb-4">
-            <div class="form-group">
-              <input hidden value="<%= product.id %>" name="product[<%= index++ %>][id]" class="form-control"/>
-            </div>
             <div class="col-md-5 col-lg-3 col-xl-3">
               <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
                 <a href="/products/<%= product.id %>">
@@ -45,14 +41,12 @@
                       </button>
                     </form>
                   </div>
-                  
                 </div>
               </div>
             </div>
           </div>
           <hr class="mb-4">
         <% } %>
-      </form>
       </div>
     </div>
   </div>
@@ -69,7 +63,14 @@
             <span>R$ <%= total.toFixed(2)%></span>
           </li>
         </ul>
-        <button type="submit" form="form-send-order" class="btn btn-primary btn-block mt-3">Finalizar</button>
+        <form action="/order/" method="POST" >
+          <% for (product of products) { %>
+            <% index++;  %>
+            <input hidden name="product[<%= index %>][id]" value="<%= product.id %>" class="form-control" type="text">
+            <input hidden name="product[<%= index %>][quantity]" value="<%= product.quantity %>" class="form-control" type="text">
+          <% } %>
+          <button type="submit" class="btn btn-primary btn-block mt-3">Finalizar Compra</button>
+        </form>
       </div>
     </div>
   </div>
