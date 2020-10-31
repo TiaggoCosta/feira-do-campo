@@ -1,12 +1,14 @@
 const express = require('express');
 const orderRepo = require('../models/order');
-const productsRepo = require('../models/product');
+const cartsRepo = require('../models/cart');
+const { isAuthenticated } = require('../middlewares/isAuthenticated');
 
 const router = express.Router();
 
 // Receive a post request to create new order
-router.post('/', async (req, res) => {
+router.post('/', isAuthenticated, async (req, res) => {
     const { product } = req.body;
+    const { _id, idCart } = req.user;
     
     let orders = Object.values(product.reduce((order, {producer, ...props}) => {
         if (!order[producer]) {
@@ -18,15 +20,21 @@ router.post('/', async (req, res) => {
     }, {}));
 
     orders.forEach(order => {
-        order.costumer = req.user._id;
+        order.costumer = _id;
         
         orderRepo.create(order, (err, createdOrder) => {
             if(err) {
                 console.log(err);
-            } else {
-                console.log(createdOrder);
             }
         });
+    });
+
+    cartsRepo.findById(idCart, (err, foundCart) => {
+        if(err) {
+            console.log(err);
+        }
+        foundCart.items = [];
+        foundCart.save();
     });
     
     res.redirect('/');
