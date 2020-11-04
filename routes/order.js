@@ -1,7 +1,7 @@
 const express = require('express');
 const orderRepo = require('../models/order');
 const cartsRepo = require('../models/cart');
-const { isAuthenticated } = require('../middlewares/isAuthenticated');
+const { isAuthenticated, isProdutor } = require('../middlewares/isAuthenticated');
 
 const router = express.Router();
 
@@ -39,5 +39,18 @@ router.post('/', isAuthenticated, async (req, res) => {
     
     res.redirect('/');
 });
+
+// INDEX - GET all orders
+router.get('/producer', isProdutor, (req, res) => {
+    orderRepo.find({ producer: req.user._id }, (err, orders) => {
+      if(err){
+        console.log(err);
+        res.redirect('/');
+      } else {
+          console.log(orders);
+        //res.render('pages/orders/producer', { orders });
+      }
+    });
+  });
 
 module.exports = router;
