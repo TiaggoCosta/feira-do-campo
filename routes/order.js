@@ -12,7 +12,7 @@ router.post('/', isAuthenticated, async (req, res) => {
     
     let orders = Object.values(product.reduce((order, {producer, ...props}) => {
         if (!order[producer]) {
-            order[producer] = Object.assign({}, {producer,products : [props]});
+            order[producer] = Object.assign({}, {producer, products : [props]});
         } else {
             order[producer].products.push(props);
         }
@@ -48,8 +48,7 @@ router.get('/', isAuthenticated, (req, res) => {
             res.redirect('/');
         } else {
             console.log(orders);
-            res.redirect('/');
-            //res.render('pages/orders/', { orders });
+            res.render('pages/orders/', { orders });
         }
     });
 });
@@ -62,7 +61,7 @@ router.get('/producer', isProdutor, (req, res) => {
             res.redirect('/');
         } else {
             console.log(orders);
-            //res.render('pages/orders/producer', { orders });
+            res.render('pages/orders/producer', { orders });
         }
     });
 });
