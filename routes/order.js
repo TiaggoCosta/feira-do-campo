@@ -40,17 +40,31 @@ router.post('/', isAuthenticated, async (req, res) => {
     res.redirect('/');
 });
 
-// INDEX - GET all orders
+// exibe lista de pedidos do consumidor
+router.get('/', isAuthenticated, (req, res) => {
+    orderRepo.find({ costumer: req.user._id }, (err, orders) => {
+        if(err){
+            console.log(err);
+            res.redirect('/');
+        } else {
+            console.log(orders);
+            res.redirect('/');
+            //res.render('pages/orders/', { orders });
+        }
+    });
+});
+
+// exibe lista de pedidos do produtor
 router.get('/producer', isProdutor, (req, res) => {
     orderRepo.find({ producer: req.user._id }, (err, orders) => {
-      if(err){
-        console.log(err);
-        res.redirect('/');
-      } else {
-          console.log(orders);
-        //res.render('pages/orders/producer', { orders });
-      }
+        if(err){
+            console.log(err);
+            res.redirect('/');
+        } else {
+            console.log(orders);
+            //res.render('pages/orders/producer', { orders });
+        }
     });
-  });
+});
 
 module.exports = router;
