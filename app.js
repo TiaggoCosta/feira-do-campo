@@ -9,9 +9,9 @@ const methodOverride = require('method-override');
 const multer = require('multer');
 const upload = multer();
 const cookieSession = require('cookie-session');
-const session = require("express-session");
-const flash = require("connect-flash");
-const passport = require("passport");
+const session = require('express-session');
+const flash = require('connect-flash');
+const passport = require('passport');
 require("./controller/auth")(passport);
 const indexRoutes = require('./routes/index');
 const productsRoutes = require('./routes/products');
@@ -23,8 +23,9 @@ app.set('view engine', 'ejs') ;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(upload.array()); 
 app.use(express.static(__dirname + '/public'));
-app.use(methodOverride("_method"));
+app.use(methodOverride('_method'));
 app.use(expressLayouts);
+app.locals.moment = require('moment');
 app.use(
   cookieSession({
     keys: ['digaamigoeentre']
@@ -33,7 +34,7 @@ app.use(
 
 //sessão
 app.use(session({
-  secret: "feiralovelace",
+  secret: 'feiralovelace',
   resave: true,
   saveUninitialized: true
 }));
@@ -43,9 +44,9 @@ app.use(passport.session());
 app.use(flash());
 
 app.use((req, res, next) => {
-  res.locals.error = req.flash("error");
-  res.locals.success = req.flash("success");
-  res.locals.info = req.flash("info");
+  res.locals.error = req.flash('error');
+  res.locals.success = req.flash('success');
+  res.locals.info = req.flash('info');
   res.locals.user_global = req.user;
   next()
 });
