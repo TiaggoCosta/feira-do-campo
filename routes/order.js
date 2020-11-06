@@ -69,6 +69,10 @@ router.get('/producer', isProdutor, (req, res) => {
 // busca informações de pedidos do produtor
 router.get('/:id/producer', isProdutor, async(req, res) => {
     orderRepo.findById(req.params.id, (err, foundOrder) => {
+        if(err) {
+            req.flash("error", "O pedido não foi encontrado!");
+            res.redirect("/order/producer");
+        }
         if(foundOrder.producer == req.user._id) {
             res.render('pages/orders/show', { order: foundOrder });
         } else {
