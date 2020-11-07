@@ -1,1 +1,34 @@
-<h1><%- moment(order.createdAt).fromNow() %> </h1>
+<%- contentFor('body') %>
+<div class="container"></div>
+  <div class="page-header mb-5 mt-5">
+      <h2 class="title">Gerenciamento de Vendas</h2>
+  </div>
+
+  <div class="d-flex mb-1" >
+    <h4>Vendas Realizadas</h4>
+  </div>
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Preço</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (product of order.products){%>
+        <tr>
+          <td><%= product.productId %></td>
+          <td><%= product.quantity %></td>
+          <td><%= product.price %></td>
+          <td>
+            <% var total = product.quantity * product.price
+            %>
+            R$ <%= total.toFixed(2)%>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
