@@ -50,7 +50,6 @@ router.get('/', isAuthenticated, (req, res) => {
             console.log(err);
             res.redirect('/');
         } else {
-            console.log(orders);
             res.render('pages/orders/', { orders });
         }
     });
@@ -63,7 +62,6 @@ router.get('/producer', isProdutor, (req, res) => {
             console.log(err);
             res.redirect('/');
         } else {
-            console.log(orders);
             res.render('pages/orders/producer', { orders });
         }
     });
