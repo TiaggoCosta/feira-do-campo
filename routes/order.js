@@ -8,7 +8,7 @@ const router = express.Router();
 // Receive a post request to create new order
 router.post('/', isAuthenticated, async (req, res) => {
     const { product } = req.body;
-    const { _id, idCart } = req.user;
+    const { _id, idCart, email, firstName, lastName } = req.user;
     
     let orders = Object.values(product.reduce((order, {producer, ...props}) => {
         if (!order[producer]) {
@@ -21,7 +21,10 @@ router.post('/', isAuthenticated, async (req, res) => {
 
     orders.forEach(order => {
         order.costumer = _id;
-        
+        order.costumerEmail = email;
+        order.costumerFirstName = firstName;
+        order.costumerLastName = lastName;
+
         orderRepo.create(order, (err, createdOrder) => {
             if(err) {
                 console.log(err);
