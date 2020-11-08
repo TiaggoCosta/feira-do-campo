@@ -67,6 +67,22 @@ router.get('/producer', isProdutor, (req, res) => {
     });
 });
 
+// busca informações de pedidos do consumidor
+router.get('/:id', isAuthenticated, async(req, res) => {
+    orderRepo.findById(req.params.id, (err, foundOrder) => {
+        if(err) {
+            req.flash("error", "O pedido não foi encontrado!");
+            res.redirect("/order/producer");
+        }
+        if(foundOrder.costumer == req.user._id) {
+            res.render('pages/orders/show', { order: foundOrder });
+        } else {
+            req.flash("error", "Parece que este pedido não é de sua responsabilidade!");
+            res.redirect("/order/");
+        }
+    });
+});
+
 // busca informações de pedidos do produtor
 router.get('/:id/producer', isProdutor, async(req, res) => {
     orderRepo.findById(req.params.id, (err, foundOrder) => {
