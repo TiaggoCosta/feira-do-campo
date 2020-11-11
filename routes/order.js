@@ -99,4 +99,21 @@ router.get('/:id/producer', isProdutor, async(req, res) => {
     });
 });
 
+// Atualizar status do pedido
+router.put('/:id', isAuthenticated, (req, res) => {
+    //const { status } = req.body;
+    orderRepo.findById(req.params.id, (err, foundOrder) => {
+        if(err) {
+            console.log(err);
+        } 
+        if(req.user._id == foundOrder.producer) {
+            console.log('o usuario é o produtor')
+            res.redirect("/order/" + req.params.id + "/producer");
+        } else if(req.user._id == foundOrder.costumer) {
+            console.log('o usuario é o consumidor')
+            res.redirect("/order/" + req.params.id);
+        }
+    });
+});
+
 module.exports = router;
