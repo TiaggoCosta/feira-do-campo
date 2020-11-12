@@ -8,6 +8,7 @@
     <h4>Informações Venda</h4>
 
     <form action="/order/<%= order._id %>?_method=PUT" method="POST" >
+      <input hidden value="Separado para entrega" name="status" />
       <button type="submit" class="btn btn-primary btn-block mt-3">Mudar status</button>
     </form>
     

@@ -101,11 +101,14 @@ router.get('/:id/producer', isProdutor, async(req, res) => {
 
 // Atualizar status do pedido
 router.put('/:id', isAuthenticated, (req, res) => {
-    //const { status } = req.body;
+    const { status } = req.body;
+    console.log(status)
     orderRepo.findById(req.params.id, (err, foundOrder) => {
         if(err) {
             console.log(err);
-        } 
+        }
+        //foundOrder.status = status; 
+        //foundOrder.save();
         if(req.user._id == foundOrder.producer) {
             console.log('o usuario é o produtor')
             res.redirect("/order/" + req.params.id + "/producer");
