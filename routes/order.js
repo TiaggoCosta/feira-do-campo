@@ -5,6 +5,12 @@ const { isAuthenticated, isProdutor } = require('../middlewares/isAuthenticated'
 
 const router = express.Router();
 
+let orderStatus = new Map([
+    [0, 'Pendente'],
+    [1, 'Separado para entega'],
+    [2, 'Entregue']
+]);
+
 // Receive a post request to create new order
 router.post('/', isAuthenticated, async (req, res) => {
     const { product } = req.body;
@@ -50,7 +56,7 @@ router.get('/', isAuthenticated, (req, res) => {
             console.log(err);
             res.redirect('/');
         } else {
-            res.render('pages/orders/', { orders });
+            res.render('pages/orders/', { orders, orderStatus });
         }
     });
 });
@@ -62,7 +68,7 @@ router.get('/producer', isProdutor, (req, res) => {
             console.log(err);
             res.redirect('/');
         } else {
-            res.render('pages/orders/producer/index', { orders });
+            res.render('pages/orders/producer/index', { orders, orderStatus });
         }
     });
 });
@@ -75,7 +81,7 @@ router.get('/:id', isAuthenticated, async(req, res) => {
             res.redirect("/order/producer");
         }
         if(foundOrder.costumer == req.user._id) {
-            res.render('pages/orders/show', { order: foundOrder });
+            res.render('pages/orders/show', { order: foundOrder, orderStatus });
         } else {
             req.flash("error", "Parece que este pedido não é de sua responsabilidade!");
             res.redirect("/order/");
@@ -91,7 +97,7 @@ router.get('/:id/producer', isProdutor, async(req, res) => {
             res.redirect("/order/producer");
         }
         if(foundOrder.producer == req.user._id) {
-            res.render('pages/orders/producer/show', { order: foundOrder });
+            res.render('pages/orders/producer/show', { order: foundOrder, orderStatus });
         } else {
             req.flash("error", "Parece que este pedido não é de sua responsabilidade!");
             res.redirect("/order/producer");
@@ -102,7 +108,6 @@ router.get('/:id/producer', isProdutor, async(req, res) => {
 // Atualizar status do pedido
 router.put('/:id', isAuthenticated, (req, res) => {
     const { status } = req.body;
-    console.log(status)
     orderRepo.findById(req.params.id, (err, foundOrder) => {
         if(err) {
             console.log(err);
