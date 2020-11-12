@@ -62,7 +62,7 @@ router.get('/producer', isProdutor, (req, res) => {
             console.log(err);
             res.redirect('/');
         } else {
-            res.render('pages/orders/producer', { orders });
+            res.render('pages/orders/producer/index', { orders });
         }
     });
 });
@@ -91,7 +91,7 @@ router.get('/:id/producer', isProdutor, async(req, res) => {
             res.redirect("/order/producer");
         }
         if(foundOrder.producer == req.user._id) {
-            res.render('pages/orders/show', { order: foundOrder });
+            res.render('pages/orders/producer/show', { order: foundOrder });
         } else {
             req.flash("error", "Parece que este pedido não é de sua responsabilidade!");
             res.redirect("/order/producer");
