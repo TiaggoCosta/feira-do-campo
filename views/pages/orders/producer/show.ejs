@@ -1,0 +1,53 @@
+<%- contentFor('body') %>
+<div class="container"></div>
+  <div class="page-header mb-5 mt-5">
+      <h2 class="title">Gerenciamento de Vendas</h2>
+  </div>
+
+  <div class="d-flex mb-1" >
+    <h4>Informações Venda</h4>
+
+    <form action="/order/<%= order._id %>?_method=PUT" method="POST" >
+      <button type="submit" class="btn btn-primary btn-block mt-3">Mudar status</button>
+    </form>
+    
+  </div>
+  <table class="table table-borderless table-striped table-responsive-md">
+    <thead class="bg-light">
+      <tr>
+        <th class="py-4">Produto</th>
+        <th class="py-4">Quantidade</th>
+        <th class="py-4">Preço</th>
+        <th class="py-4">Total Produto</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (product of order.products){%>
+        <tr>
+          <td class="py-4"><%= product.title %></td>
+          <td class="py-4"><%= product.quantity %></td>
+          <td class="py-4"><%= product.price %></td>
+          <td class="py-4">
+            <% var total = product.quantity * product.price
+            %>
+            R$ <%= total.toFixed(2)%>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td class="font-weight-bold">Total Venda</td>
+        <td class="font-weight-bold">
+          <% var total = order.products.reduce((acumulador, product) => {
+              return acumulador += product.price * product.quantity;
+            }, 0)
+          %>
+          R$ <%= total.toFixed(2)%>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
