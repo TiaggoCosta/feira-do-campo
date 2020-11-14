@@ -123,7 +123,7 @@ router.get("/login", function(req, res){
           user.save();
         }
         req.logIn(user, function(err) {
-          if(err) return res.rdirect('/login');
+          if(err) return res.redirect('/login');
           return res.redirect('/');
         })
         
