@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const OrderSchema = new mongoose.Schema({
-   costumer: String,
-   costumerEmail: String,
-   costumerFirstName: String,
-   costumerLastName: String,
+   customer: String,
+   customerEmail: String,
+   customerFirstName: String,
+   customerLastName: String,
    producer: String,
    products: [
       {

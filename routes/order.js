@@ -26,10 +26,10 @@ router.post('/', isAuthenticated, async (req, res) => {
     }, {}));
 
     orders.forEach(order => {
-        order.costumer = _id;
-        order.costumerEmail = email;
-        order.costumerFirstName = firstName;
-        order.costumerLastName = lastName;
+        order.customer = _id;
+        order.customerEmail = email;
+        order.customerFirstName = firstName;
+        order.customerLastName = lastName;
 
         orderRepo.create(order, (err, createdOrder) => {
             if(err) {
@@ -51,7 +51,7 @@ router.post('/', isAuthenticated, async (req, res) => {
 
 // exibe lista de pedidos do consumidor
 router.get('/', isAuthenticated, (req, res) => {
-    orderRepo.find({ costumer: req.user._id }, (err, orders) => {
+    orderRepo.find({ customer: req.user._id }, (err, orders) => {
         if(err){
             console.log(err);
             res.redirect('/');
@@ -80,7 +80,7 @@ router.get('/:id', isAuthenticated, async(req, res) => {
             req.flash("error", "O pedido não foi encontrado!");
             res.redirect("/order/producer");
         }
-        if(foundOrder.costumer == req.user._id) {
+        if(foundOrder.customer == req.user._id) {
             res.render('pages/orders/show', { order: foundOrder, orderStatus });
         } else {
             req.flash("error", "Parece que este pedido não é de sua responsabilidade!");
@@ -117,7 +117,7 @@ router.put('/:id', isAuthenticated, (req, res) => {
         if(req.user._id == foundOrder.producer) {
             console.log('o usuario é o produtor')
             res.redirect("/order/" + req.params.id + "/producer");
-        } else if(req.user._id == foundOrder.costumer) {
+        } else if(req.user._id == foundOrder.customer) {
             console.log('o usuario é o consumidor')
             res.redirect("/order/" + req.params.id);
         }
