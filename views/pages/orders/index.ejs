@@ -32,7 +32,7 @@
             %>
             R$ <%= total.toFixed(2)%>
           </td>
-          <td class="py-4"><%= orderStatus.get(0) %></td>
+          <td class="py-4"><%= orderStatus.get(order.status) %></td>
         </tr>
       <% } %>
     </tbody>
