@@ -5,7 +5,7 @@
   </div>
 
   <div class="col-sm-6">
-    <p><h5>Situação atual do pedido: <b id="status"><%= orderStatus.get(order.status) %></b></h5></p>
+    <p><h5>Situação atual do pedido: <b><%= orderStatus.get(order.status) %></b></h5></p>
   </div>
 
   <div class="d-flex justify-content-end mb-4" >
@@ -17,10 +17,10 @@
       <form action="/order/<%= order._id %>?_method=PUT" method="POST" >
         <input hidden value="2" name="status" />
         <%if (order.status == 1) {%>
-          <button id="btnConfirmar" type="submit" class="btn btn-success btn-block">Confirmar recebimento</button>
+          <button type="submit" class="btn btn-success btn-block">Confirmar recebimento</button>
         <%} else {%>
-          <button id="btnConfirmar" type="submit" class="btn btn-success btn-block" disabled>Confirmar recebimento</button>
-      <%} %>
+          <button type="submit" class="btn btn-success btn-block" disabled>Confirmar recebimento</button>
+        <%} %>
         </form>
     </div>
     

@@ -13,6 +13,7 @@
         <th class="py-4">Data</th>
         <th class="py-4">Total</th>
         <th class="py-4">Cliente</th>
+        <th class="py-4">Status</th>
       </tr>
     </thead>
     <tbody>
@@ -32,7 +33,8 @@
             %>
             R$ <%= total.toFixed(2)%>
           </td>
-          <td class="py-4"><%= order.customerEmail %></td>
+          <td class="py-4"><%= order.customerFirstName + " " + order.customerLastName %></td>
+          <td class="py-4"><%= orderStatus.get(order.status) %></td>
         </tr>
       <% } %>
     </tbody>
