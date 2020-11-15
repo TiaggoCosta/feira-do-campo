@@ -4,16 +4,24 @@
       <h2 class="title">Informações do Pedido</h2>
   </div>
 
+  <div class="col-sm-6">
+    <p><h5>Situação atual do pedido: <b id="status"><%= orderStatus.get(order.status) %></b></h5></p>
+  </div>
+
   <div class="d-flex justify-content-end mb-4" >
     <div class="col-sm-6">
-      <p>Situação do pedido <i class="fas fa-question-circle text-info" data-toggle="popover" data-placement="right"
+      <p>Alterar situação do pedido <i class="fas fa-question-circle text-info" data-toggle="popover" data-placement="right"
       data-content="Clique no botão ao lado para confirmar o recebimento do pedido." ></i></p>
     </div>
     <div class= "text-right col-sm-6">   
       <form action="/order/<%= order._id %>?_method=PUT" method="POST" >
-        <input hidden value="1" name="status" />
-        <button type="submit" class="btn btn-success btn-block">Confirmar recebimento</button>
-      </form>
+        <input hidden value="2" name="status" />
+        <%if (order.status == 1) {%>
+          <button id="btnConfirmar" type="submit" class="btn btn-success btn-block">Confirmar recebimento</button>
+        <%} else {%>
+          <button id="btnConfirmar" type="submit" class="btn btn-success btn-block" disabled>Confirmar recebimento</button>
+      <%} %>
+        </form>
     </div>
     
   </div>
@@ -55,4 +63,5 @@
       </tr>
     </tfoot>
   </table>
+  <a href="/order/"><button class="btn btn-secondary col-sm-1 btn-block mt-2 mb-3" >Voltar</button></a>
 </div>
