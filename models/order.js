@@ -14,7 +14,8 @@ const OrderSchema = new mongoose.Schema({
          price: String
       }
    ],
-   createdAt: { type: Date, default: Date.now }
+   createdAt: { type: Date, default: Date.now },
+   status: Number,
 });
 
 module.exports = mongoose.model('Order', OrderSchema);
