@@ -115,10 +115,8 @@ router.put('/:id', isAuthenticated, (req, res) => {
         foundOrder.status = status; 
         foundOrder.save();
         if(req.user._id == foundOrder.producer) {
-            console.log('o usuario é o produtor')
             res.redirect("/order/" + req.params.id + "/producer");
         } else if(req.user._id == foundOrder.customer) {
-            console.log('o usuario é o consumidor')
             res.redirect("/order/" + req.params.id);
         }
     });
