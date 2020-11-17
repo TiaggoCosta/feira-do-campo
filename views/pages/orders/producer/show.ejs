@@ -21,9 +21,11 @@
           <input hidden value="1" name="status" />
           <%if (order.status == 0) {%>
             <button type="submit" class="btn btn-success btn-block">Separar para entrega</button>
+          <%} else if (order.status == 1){%>
+            <button class="btn btn-secondary btn-block" disabled>Separado para entrega</button>
           <%} else {%>
-            <button type="submit" class="btn btn-success btn-block" disabled>Separar para entrega</button>
-          <%} %>
+            <button class="btn btn-primary btn-block" disabled>Entregue</button>
+          <%}  %>
         </form>
       </div>
   </div>
@@ -66,5 +68,7 @@
       </tr>
     </tfoot>
   </table>
-  <a href="/order/producer"><button class="btn btn-secondary col-sm-1 btn-block mt-2 mb-3" >Voltar</button></a>
+  <div>
+    <a href="/order/producer">Voltar</a>
+  </div>
 </div>

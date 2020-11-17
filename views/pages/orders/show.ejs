@@ -16,11 +16,13 @@
     <div class= "text-right col-sm-6">   
       <form action="/order/<%= order._id %>?_method=PUT" method="POST" >
         <input hidden value="2" name="status" />
-        <%if (order.status == 1) {%>
-          <button type="submit" class="btn btn-success btn-block">Confirmar recebimento</button>
+        <%if (order.status == 0) {%>
+          <button class="btn btn-secondary btn-block" disabled>Pendente</button>
+        <%} else if (order.status == 1){%>
+          <button type="submit" class="btn btn-success btn-block">Separado para entrega</button>
         <%} else {%>
-          <button type="submit" class="btn btn-success btn-block" disabled>Confirmar recebimento</button>
-        <%} %>
+          <button class="btn btn-primary btn-block" disabled>Entregue</button>
+        <%}  %>
         </form>
     </div>
     
@@ -63,5 +65,7 @@
       </tr>
     </tfoot>
   </table>
-  <a href="/order/"><button class="btn btn-secondary col-sm-1 btn-block mt-2 mb-3" >Voltar</button></a>
+  <div>
+    <a href="/order/">Voltar</a>
+  </div>
 </div>
