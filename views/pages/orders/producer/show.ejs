@@ -22,10 +22,8 @@
           <%if (order.status == 0) {%>
             <button type="submit" class="btn btn-success btn-block">Separar para entrega</button>
           <%} else if (order.status == 1){%>
-            <button class="btn btn-secondary btn-block" disabled>Separado para entrega</button>
-          <%} else {%>
-            <button class="btn btn-primary btn-block" disabled>Entregue</button>
-          <%}  %>
+            <button type="submit" class="btn btn-secondary btn-block" disabled>Separado para entrega</button>
+          <%} %>
         </form>
       </div>
   </div>
