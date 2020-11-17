@@ -10,6 +10,9 @@ router.post('/products/:id', async (req, res) => {
   // Figure out the cart!
   let cartId;
   let cart;
+  if(!req.session.cartId) {
+    cart = await cartsRepo.create( { items: [] } );
+  }
   if(req.user && req.user.idCart) {
     cartId = req.user.idCart;
   } else {
@@ -18,6 +21,7 @@ router.post('/products/:id', async (req, res) => {
 
   const productId = req.params.id;
   if (!cartId) {
+    console.log("ta sem carrinho")
     // We dont have a cart, we need to create one,
     // and store the cart id on the req.session.cartId
     // property
