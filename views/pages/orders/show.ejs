@@ -9,10 +9,12 @@
   </div>
 
   <div class="d-flex justify-content-end mb-4" >
+    <%if (order.status == 1){%>
     <div class="col-sm-6">
       <p>Alterar situação do pedido <i class="fas fa-question-circle text-info" data-toggle="popover" data-placement="right"
       data-content="Clique no botão ao lado para confirmar o recebimento do pedido." ></i></p>
     </div>
+    <%} %>
     <div class= "text-right col-sm-6">   
       <form action="/order/<%= order._id %>?_method=PUT" method="POST" >
         <input hidden value="2" name="status" />
