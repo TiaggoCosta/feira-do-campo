@@ -1,7 +1,7 @@
 $(".add-to-cart").click(function(eventObject) {
   eventObject.preventDefault();
-  axios.post('cart/products/'+this.productId.value, {
-    productId: this.productId.value
+  axios.post('cart/products/'+this.productId, {
+    productId: this.productId
   })
   .then(function (response) {
     console.log(response);
