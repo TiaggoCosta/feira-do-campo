@@ -35,9 +35,8 @@
                 </div>
               </div>
               <footer class="card-footer">
-                <form  class="add-to-cart">
-                  <input hidden value="<%= product.id %>" name="productId" />
-                  <button class="btn btn-success btn-sm btn-block add-to-cart">
+                <form>
+                  <button id="btn-<%= product.id %>" class="btn btn-success btn-sm btn-block add-to-cart">
                     Comprar <i class="fas fa-shopping-cart"></i>
                   </button>
                 </form>

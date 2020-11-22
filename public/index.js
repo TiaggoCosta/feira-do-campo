@@ -1,7 +1,11 @@
 $(".add-to-cart").click(function(eventObject) {
+
+  var btnId = eventObject.target.id;
+  var productId = btnId.replace('btn-','')
+
   eventObject.preventDefault();
-  axios.post('cart/products/'+this.productId.value, {
-    productId: this.productId.value
+  axios.post('cart/products/'+productId, {
+    productId: this.productId
   })
   .then(function (response) {
     console.log(response);
