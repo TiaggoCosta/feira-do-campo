@@ -2,6 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const User = require('../models/user');
 const {isAuthenticated} = require('../middlewares/isAuthenticated');
+const bcrypt = require('bcrypt');
 
 // INDEX - GET to show view for editing a user
 router.get("/", isAuthenticated, function(req, res){
@@ -18,7 +19,7 @@ router.get("/", isAuthenticated, function(req, res){
 });
 
 // UPDATE - update a user
-router.put('/', isAuthenticated, (req, res) => {
+router.put('/', isAuthenticated, async (req, res) => {
   var userId;
   userId = req.user._id;
     
@@ -32,19 +33,20 @@ router.put('/', isAuthenticated, (req, res) => {
       res.redirect('/user');
       return;
     } else {
-      user.password = password; 
+      await bcrypt.hash(password, 10, async (err, hash) => {
+        user.password = hash; 
+        User.findByIdAndUpdate(userId, user, (err, updatedUser) => {
+          if(err) {
+            console.log(err);
+            req.flash("error", "Ocorreu um erro ao editar os dados, entre em contato para assitência!");
+          }
+          req.flash("success", "Dados atualizados com sucesso!");
+          console.log('User updated successfully, id: ' + updatedUser.id);
+          res.redirect('/user');
+        });
+      });
     }
-  }
-
-  User.findByIdAndUpdate(userId, user, (err, updatedUser) => {
-    if(err) {
-      console.log(err);
-      req.flash("error", "Ocorreu um erro ao editar os dados, entre em contato para assitência!");
-    }
-    req.flash("success", "Dados atualizados com sucesso!");
-    console.log('User updated successfully, id: ' + updatedUser.id);
-    res.redirect('/user');
-  });
+  }  
 });
 
 module.exports = router;
