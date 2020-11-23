@@ -46,7 +46,17 @@ router.put('/', isAuthenticated, async (req, res) => {
         });
       });
     }
-  }  
+  } else {
+    User.findByIdAndUpdate(userId, user, (err, updatedUser) => {
+      if(err) {
+        console.log(err);
+        req.flash("error", "Ocorreu um erro ao editar os dados, entre em contato para assitência!");
+      }
+      req.flash("success", "Dados atualizados com sucesso!");
+      console.log('User updated successfully, id: ' + updatedUser.id);
+      res.redirect('/user');
+    });
+  } 
 });
 
 module.exports = router;
