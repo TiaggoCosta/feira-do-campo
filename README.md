@@ -7,7 +7,7 @@
 
 > Colaboradores do time Lovelace 
 
-| <a href="https://github.com/pachecoka" target="_blank">**Karolina Pacheco**</a> | <a href="https://github.com/Nadine-Schneider" target="_blank">**Nadine Schneider**</a> | <a href="https://github.com/TiagoKuste" target="_blank">**Tiago Costa**</a> 
+| <a href="https://github.com/pachecoka" target="_blank">**Karolina Pacheco**</a> | <a href="https://github.com/Nadine-Schneider" target="_blank">**Nadine Schneider**</a> | <a href="https://github.com/TiaggoCosta" target="_blank">**Tiago Costa**</a> 
 | :---: |:---:| :---:|
-| [![Karolina](https://avatars1.githubusercontent.com/u/38144404?s=300&u=e287da326fba1933021427603dff754eb0601ed1&v=4)](https://github.com/pachecoka) | [![Nadine](https://avatars0.githubusercontent.com/u/38010089?s=300&v=4)](https://github.com/Nadine-Schneider) | [![Tiago](https://avatars2.githubusercontent.com/u/18539662?s=300&u=c50302c179b91363c90bca74dee6ae900e1e9326&v=4)](https://github.com/TiagoKuste)
-| <a href="https://github.com/pachecoka" target="_blank">`github.com/pachecoka`</a> | <a href="https://github.com/Nadine-Schneider" target="_blank">`github.com/Nadine-Schneider`</a> | <a href="https://github.com/TiagoKuste" target="_blank">`github.com/TiagoKuste`</a>
+| [![Karolina](https://avatars1.githubusercontent.com/u/38144404?s=300&u=e287da326fba1933021427603dff754eb0601ed1&v=4)](https://github.com/pachecoka) | [![Nadine](https://avatars0.githubusercontent.com/u/38010089?s=300&v=4)](https://github.com/Nadine-Schneider) | [![Tiago](https://avatars2.githubusercontent.com/u/18539662?s=300&u=c50302c179b91363c90bca74dee6ae900e1e9326&v=4)](https://github.com/TiaggoCosta)
+| <a href="https://github.com/pachecoka" target="_blank">`github.com/pachecoka`</a> | <a href="https://github.com/Nadine-Schneider" target="_blank">`github.com/Nadine-Schneider`</a> | <a href="https://github.com/TiaggoCosta" target="_blank">`github.com/TiaggoCosta`</a>
