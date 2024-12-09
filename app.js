@@ -51,21 +51,25 @@ app.use((req, res, next) => {
   next()
 });
 
-mongoose.connect(
-    process.env.DATABASEURL,
-    { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
-    (error) => {
-        if(error) console.log(error);
+mongoose.connect(process.env.DATABASEURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log('Aplicação conectada ao banco de dados!');
+})
+.catch((err) => {
+  console.error('Erro ao conectar ao MongoDB:', err.message);
+});
 
-        console.log('Aplicação conectada ao banco de dados!');
-    }
-);
 
 app.use('/', indexRoutes);
 app.use('/products', productsRoutes);
 app.use('/cart', cartsRoutes);
 app.use('/user', userRoutes);
 app.use('/order', orderRoutes);
+
+console.log('PORT:', process.env.PORT);
 
 app.listen(process.env.PORT, () => {
     console.log('A Feira do Campo está no ar!');
